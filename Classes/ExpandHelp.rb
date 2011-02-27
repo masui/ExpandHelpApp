@@ -16,18 +16,33 @@ class ExpandHelp
   attr_accessor :input           # ヘルプキーワード入力枠
   attr_accessor :table           # 検索結果
   attr_accessor :command         # 実行するUnixコマンド
-  attr_accessor :commandoutput   # 実行するUnixコマンド
+  attr_accessor :commandoutput   # Unixコマンドの実行結果
+  attr_accessor :cwd             # 現在のディレクトリ
 	
   def initialize
     @helpdata = HelpData.new
     @generator = Generator.new
     @list = []
   end
+
+  def awakeFromNib
+    chdir(ENV['HOME'])
+#    @cwd.setStringValue(ENV['HOME'])
+#    Dir.chdir(@cwd.stringValue)
+  end
+
+  def chdir(dir)
+    @helpdata.chdir(dir)
+    @cwd.setStringValue(dir)
+  end
 	
   def generate(sender)
     @generator = Generator.new
     @helpdata.helpdata.each { |data|
-      @generator.add data[0], data[1]
+      puts data[2]
+      if !data[2] || data[2] =~ @input.stringValue.to_s then 
+        @generator.add data[0], data[1]
+      end
     }
     @list = @generator.generate(@input.stringValue)
     @table.reloadData
@@ -54,6 +69,10 @@ class ExpandHelp
   def execute(sender)
     @commandoutput.selectAll(sender)
     @commandoutput.cut(sender)
-    @commandoutput.insertText(`#{@command.stringValue}`)
+    s = eval @command.stringValue
+    @commandoutput.insertText(s.to_s)
+#    @commandoutput.insertText(`#{@command.stringValue}`)
+
+    chdir(@helpdata.cwd)
   end
 end

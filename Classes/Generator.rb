@@ -181,7 +181,7 @@ class Generator
               end
             }
             if matched then
-              res << [s, eval('"'+@commands[ruleno]+'"')]
+              res << [s, eval('%('+@commands[ruleno]+')')]
             end
           end
           output[s] = true

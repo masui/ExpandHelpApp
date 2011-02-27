@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # Generator.rb
 # ExpandHelpApp
 #
@@ -118,9 +119,9 @@ class Generator
   def generate(pat)
     puts "generate"
 	
-	res = []
+    res = []
 	
-	patterns = pat.split
+    patterns = pat.split
 
     scanner = Scanner.new(@s.join('|'))
     (startnode, endnode) = regexp(scanner,true) # top level
@@ -174,23 +175,23 @@ class Generator
             }
             patstr = Array.new(b.length,"(.*)").join("\t")
             /#{patstr}/ =~ b.join("\t")
-			matched = true
-			patterns.each { |pat|
-			    if !s.index(pat) then
-					matched = false
-					break
-				end
-			}
-			if matched then
-				res << [s, eval('"'+@commands[ruleno]+'"')]
-			end
+            matched = true
+            patterns.each { |pat|
+              if !s.index(pat) then
+                matched = false
+                break
+              end
+            }
+            if matched then
+              res << [s, eval('"'+@commands[ruleno]+'"')]
+            end
           end
           output[s] = true
         end
       }
       lists << newlist
     }
-	res
+    res
   end
 end
 

@@ -3,49 +3,49 @@
 # ExpandHelpApp
 #
 # Created by Toshiyuki Masui on 11/02/26.
-# Copyright 2011 __MyCompanyName__. All rights reserved.
+# Copyright 2011 Pitecan Systems. All rights reserved.
 
 require 'Generator'
 require 'HelpData'
 
+#
+# ExpandHelpAppのメインクラス
+#
 class ExpandHelp
-	attr_accessor :input
-    attr_accessor :table
-	attr_accessor :command
+  attr_accessor :input     # ヘルプキーワード入力枠
+  attr_accessor :table     # 検索結果
+  attr_accessor :command   # 実行するUnixコマンド
 	
-	def initialize
-		@helpdata = HelpData.new
-		@generator = Generator.new
-		@list = [["(なし)",""]]
-	end
+  def initialize
+    @helpdata = HelpData.new
+    @generator = Generator.new
+    @list = []
+  end
 	
-	def doit(sender)
-		puts "doit!"
-		@generator = Generator.new
-		@helpdata.helpdata.each { |data|
-			@generator.add data[0], data[1]
-		}
-		@list = @generator.generate(@input.stringValue)
-#		@output.selectAll(sender)
-#		@output.cut(sender)
-#		@output.insertText(@list.to_s)
-		@table.reloadData
-	end
+  def generate(sender)
+    @generator = Generator.new
+    @helpdata.helpdata.each { |data|
+      @generator.add data[0], data[1]
+    }
+    @list = @generator.generate(@input.stringValue)
+    @table.reloadData
+  end
+
+  # NSTableView Tutorial
+  # http://www.cocoadev.com/index.pl?NSTableViewTutorial
+
+  def numberOfRowsInTableView(table)
+    @table = table
+    @list.length
+  end
 	
-	def numberOfRowsInTableView(table)
-		@table = table
-		puts @list.length
-	    @list.length
-	end
-	
-	def tableView(table, objectValueForTableColumn:b, row:c)
-		@table = table
-	    @list[c][0]
-	end
-	
-	def selected(sender)
-	    puts "selected"
-		puts sender.selectedRow
-		@command.setStringValue(@list[sender.selectedRow][1])
-	end
+  def tableView(table, objectValueForTableColumn:val, row:r)
+    @table = table
+    @list[r][0]
+  end
+  
+  # table要素がクリックされたとき呼ばれる
+  def selected(sender)
+    @command.setStringValue(@list[sender.selectedRow][1])
+  end
 end

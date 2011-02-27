@@ -301,7 +301,7 @@
 							<real>186</real>
 						</array>
 						<key>RubberWindowFrame</key>
-						<string>39 98 1003 718 0 0 1440 878 </string>
+						<string>40 101 1003 718 0 0 1440 878 </string>
 					</dict>
 					<key>Module</key>
 					<string>PBXSmartGroupTreeModule</string>
@@ -329,7 +329,7 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>CE8B405A131A0F74001FF15A</string>
+										<string>CE8B40E5131A494E001FF15A</string>
 										<key>history</key>
 										<array>
 											<string>CE8B3F9613194935001FF15A</string>
@@ -354,7 +354,7 @@
 								<key>Frame</key>
 								<string>{{0, 0}, {795, 485}}</string>
 								<key>RubberWindowFrame</key>
-								<string>39 98 1003 718 0 0 1440 878 </string>
+								<string>40 101 1003 718 0 0 1440 878 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
@@ -374,7 +374,7 @@
 								<key>Frame</key>
 								<string>{{0, 490}, {795, 187}}</string>
 								<key>RubberWindowFrame</key>
-								<string>39 98 1003 718 0 0 1440 878 </string>
+								<string>40 101 1003 718 0 0 1440 878 </string>
 							</dict>
 							<key>Module</key>
 							<string>XCDetailModule</string>
@@ -538,7 +538,7 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>CE8B405B131A0F74001FF15A</string>
+		<string>CE8B40E6131A494E001FF15A</string>
 		<string>CE8B40261319DBB1001FF15A</string>
 		<string>CE8B40271319DBB1001FF15A</string>
 		<string>1CD10A99069EF8BA00B06720</string>
@@ -547,7 +547,7 @@
 		<string>/Users/masui/ExpandHelpApp/ExpandHelpApp.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
-	<string>39 98 1003 718 0 0 1440 878 </string>
+	<string>40 101 1003 718 0 0 1440 878 </string>
 	<key>WindowToolsV3</key>
 	<array>
 		<dict>

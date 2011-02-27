@@ -38,14 +38,23 @@ class ExpandHelp
   end
 	
   def generate(sender)
-    @generator = Generator.new
-    @helpdata.helpdata.each { |data|
-      if !data[2] || data[2] =~ @input.stringValue.to_s then 
-        @generator.add data[0], data[1]
+    t = Thread.new do
+      @generating = true
+      while @shouldgenerate do
+        @shouldgenerate = false
+        @generator = Generator.new
+        @helpdata.helpdata.each { |data|
+          #     if !data[2] || data[2] =~ @input.stringValue.to_s then 
+          if !data[2] || data[2] =~ @input.string then 
+            @generator.add data[0], data[1]
+          end
+        }
+        #   @list = @generator.generate(@input.stringValue)
+        @list = @generator.generate(@input.string)
+        @table.reloadData
       end
-    }
-    @list = @generator.generate(@input.stringValue)
-    @table.reloadData
+      @generating = false
+    end
   end
 
   # NSTableView Tutorial
@@ -74,5 +83,15 @@ class ExpandHelp
 #    @commandoutput.insertText(`#{@command.stringValue}`)
 
     chdir(@helpdata.cwd)
+  end
+
+  def keyDown(event) # ???
+    puts event
+  end
+
+  def textDidChange(notification)
+    puts notification
+    @shouldgenerate = true
+    generate(nil) unless @generating
   end
 end

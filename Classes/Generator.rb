@@ -117,8 +117,6 @@ class Generator
   end
 
   def generate(pat)
-    puts "generate"
-	
     res = []
 	
     patterns = pat.split

@@ -10,11 +10,13 @@ require 'HelpData'
 
 #
 # ExpandHelpAppのメインクラス
+# MacRuby以外でも動くようにしたいものだが...
 #
 class ExpandHelp
-  attr_accessor :input     # ヘルプキーワード入力枠
-  attr_accessor :table     # 検索結果
-  attr_accessor :command   # 実行するUnixコマンド
+  attr_accessor :input           # ヘルプキーワード入力枠
+  attr_accessor :table           # 検索結果
+  attr_accessor :command         # 実行するUnixコマンド
+  attr_accessor :commandoutput   # 実行するUnixコマンド
 	
   def initialize
     @helpdata = HelpData.new
@@ -47,5 +49,11 @@ class ExpandHelp
   # table要素がクリックされたとき呼ばれる
   def selected(sender)
     @command.setStringValue(@list[sender.selectedRow][1])
+  end
+
+  def execute(sender)
+    @commandoutput.selectAll(sender)
+    @commandoutput.cut(sender)
+    @commandoutput.insertText(`#{@command.stringValue}`)
   end
 end

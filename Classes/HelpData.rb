@@ -11,8 +11,10 @@ class HelpData
   def initialize
     @helpdata =
       [
-       ['鎌倉の天気を調べたい',
-        '`open http://3memo.com/masui/tenki`'],
+       ['(#{weather})の天気を調べる',
+        '`open http://tenki.jp/forecast/point-#{$1}.html`'],
+       ['(#{restaurant})のレストランを調べる',
+        '`open #{$1}`'],
        ['(時計|時間|時刻)を(0|1|2|3|4|5|6|7|8|9|10|11|12)時に(セットする|設定する|あわせる)',
         '# date #{$2}:00',
         /[0-9]/], # 数字を入力したときだけ利用
@@ -36,7 +38,13 @@ class HelpData
        ['(今の|現在)(時間|時刻)は(#{date})です',
         'Time.new'],
        ['(1|2|3|4|5|6|7|8|9)MBより大きなファイルを(消す|削除する)',
-        '# delete file bigger than #{$1}MB',
+        '# delete files bigger than #{$1}MB',
+        /[0-9]/],
+       ['(1|2|3|4|5|6|7|8|9)MBより大きなファイルをリストする',
+        '# list files bigger than #{$1}MB',
+        /[0-9]/],
+       ['(10|20|30|40|50|60|70|80|90)KBより大きなファイルをリストする',
+        'bigfiles(#{$1}*1024)',
         /[0-9]/],
        ['(#{people})さんからのメールを(消す|削除する)',
         '# delete mail from #{$1}'],
@@ -44,14 +52,21 @@ class HelpData
         '`kill -9 #{$1}`'],
        ['(走って|動いて)いる(プロセス|アプリケーション|プログラム)をリストする',
         '`ps -eaf`'],
-       ['ファイルをリストする',
+       ['現在のディレクトリのファイルをリストする',
         '`ls -l`'],
-       ['tmpに移動する',
+       ['(#{ls})というファイルを見る',
+        'cat("#{$1}")'],
+       ['tmpディレクトリに移動する',
         'chdir("/tmp"); `ls -l`'],
-       ['(東京|鎌倉|横浜|湘南台)から(東京|鎌倉|横浜|湘南台)までの電車を調べる',
-        '`open "http://www.jorudan.co.jp/norikae/cgi/nori.cgi?rf=top&eok1=&eok2=&pg=0&eki1=#{$1}&eki2=#{$2}&Cway=0&S=検索&Csg=1"`'],
-       ['(#{people})のtwitterを読む',
+       ['(#{station})駅から(#{station})駅までの電車(の(時刻|時間))を調べる',
+        '`open "http://www.jorudan.co.jp/norikae/cgi/nori.cgi?rf=top&eok1=&eok2=&pg=0&eki1=#{$1}&eki2=#{$2}&Cway=0&S=検索&Csg=1"`',
+        /電車|駅|時刻|時間/],
+       ['(#{twitteraccount})のtwitterを読む',
         '`open http://twitter.com/#{$1}`'],
+       ['twitterを読む',
+        '`open http://twitter.com/`'],
+       ['アラームを鳴らす',
+        'alarm'],
       ]
     @cwd = ENV['HOME']
   end
@@ -60,17 +75,26 @@ class HelpData
     ["増井\tmasui", "山田\tyamada"].join("|")
   end
 
-  def ps
-    pslines = `ps -eaf`.split(/[\r\n]/)
-    pslines.shift
-    pslines.collect { |line|
-      line.sub!(/^\s+/,'')
-      elements = line.split(/ +/)
-      pid = elements[1].to_i
-      pname = elements[7].to_s
-      pname.sub!(/^.*\//,'')
-      "#{pname}\t#{pid}"
-    }.join('|')
+  def weather
+    ["鎌倉\t773",
+     "平塚\t772",
+     "藤沢\t774",
+     "秋葉原\t682",
+     "渋谷\t694",
+     "横浜\t744",
+    ].join("|")
+  end
+
+  def station
+    "鎌倉|逗子|藤沢|戸塚|横浜|渋谷|新宿|東京|品川|湘南台"
+  end
+
+  def twitteraccount
+    "増井\tmasui|池田信夫\tikedanob"
+  end
+
+  def restaurant
+    "鎌倉\thttp://r.tabelog.com/kanagawa/A1404/A140402/R2568/|湘南台\thttp://r.tabelog.com/kanagawa/A1404/A140405/lst/"
   end
 
   def date

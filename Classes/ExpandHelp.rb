@@ -7,6 +7,7 @@
 
 require 'Generator'
 require 'HelpData'
+require 'Lib'
 
 #
 # ExpandHelpAppのメインクラス
@@ -39,7 +40,6 @@ class ExpandHelp
   def generate(sender)
     @generator = Generator.new
     @helpdata.helpdata.each { |data|
-      puts data[2]
       if !data[2] || data[2] =~ @input.stringValue.to_s then 
         @generator.add data[0], data[1]
       end

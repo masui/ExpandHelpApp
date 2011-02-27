@@ -1,0 +1,166 @@
+TExpandHelpApp
+v7
+r0
+t320404819.197541
+cCheck dependencies
+cProcessInfoPlistFile /Users/masui/ExpandHelpApp/build/Debug/ExpandHelpApp.app/Contents/Info.plist Info.plist
+cCopyStringsFile /Users/masui/ExpandHelpApp/build/Debug/ExpandHelpApp.app/Contents/Resources/English.lproj/InfoPlist.strings English.lproj/InfoPlist.strings
+cCpResource build/Debug/ExpandHelpApp.app/Contents/Resources/rb_main.rb rb_main.rb
+cCompileXIB /Users/masui/ExpandHelpApp/English.lproj/MainMenu.xib
+cCompileC build/ExpandHelpApp.build/Debug/ExpandHelpApp.build/Objects-normal/x86_64/main.o /Users/masui/ExpandHelpApp/main.m normal x86_64 objective-c com.apple.compilers.gcc.4_2
+cLd /Users/masui/ExpandHelpApp/build/Debug/ExpandHelpApp.app/Contents/MacOS/ExpandHelpApp normal x86_64
+cTouch /Users/masui/ExpandHelpApp/build/Debug/ExpandHelpApp.app
+
+N/Developer/SDKs/MacOSX10.5.sdk
+c000000004C445C5F00000000000000EE
+t1279548511
+s238
+
+N/Developer/SDKs/MacOSX10.5.sdk/Library/Frameworks/MacRuby.framework/Headers/MacRuby.h
+c000000004D65A78C0000000000000106
+t1298507660
+s262
+
+N/Library/Frameworks/MacRuby.framework/MacRuby
+c000000004D6827A400000000014E8CA8
+t1298671524
+s21925032
+
+N/System/Library/Frameworks/Cocoa.framework/Cocoa
+c000000004C9D79C1000000000000A5E0
+t1285388737
+s42464
+
+N/Users/masui/ExpandHelpApp/English.lproj/InfoPlist.strings
+c000000004D68C5C100000000000000CA
+t1298712001
+s202
+
+N/Users/masui/ExpandHelpApp/English.lproj/MainMenu.xib
+c000000004D68C5C1000000000001B56C
+t1298712001
+s111980
+
+N/Users/masui/ExpandHelpApp/build/Debug/ExpandHelpApp.app
+t1298712019
+s102
+
+N/Users/masui/ExpandHelpApp/build/Debug/ExpandHelpApp.app/Contents/Info.plist
+t1298712018
+s787
+
+N/Users/masui/ExpandHelpApp/build/Debug/ExpandHelpApp.app/Contents/MacOS/ExpandHelpApp
+t1298712019
+s9048
+
+N/Users/masui/ExpandHelpApp/build/Debug/ExpandHelpApp.app/Contents/PkgInfo
+t1298712018
+s8
+
+N/Users/masui/ExpandHelpApp/build/Debug/ExpandHelpApp.app/Contents/Resources/English.lproj/InfoPlist.strings
+t1298712018
+s202
+
+N/Users/masui/ExpandHelpApp/build/Debug/ExpandHelpApp.app/Contents/Resources/English.lproj/MainMenu.nib
+t1298712018
+s19254
+
+N/Users/masui/ExpandHelpApp/build/Debug/ExpandHelpApp.app/Contents/Resources/rb_main.rb
+t1298712018
+s627
+
+N/Users/masui/ExpandHelpApp/build/ExpandHelpApp.build/Debug/ExpandHelpApp.build/Objects-normal/x86_64/ExpandHelpApp.LinkFileList
+c000000004D68C5D2000000000000006C
+t1298712018
+s108
+
+N/Users/masui/ExpandHelpApp/build/ExpandHelpApp.build/Debug/ExpandHelpApp.build/Objects-normal/x86_64/main.o
+t1298712019
+s5332
+
+N/Users/masui/ExpandHelpApp/main.m
+c000000004D68C5C10000000000000103
+t1298712001
+s259
+i<MacRuby/MacRuby.h>
+
+N/Users/masui/ExpandHelpApp/rb_main.rb
+c000000004D68C5C10000000000000273
+t1298712001
+s627
+
+NInfo.plist
+c000000004D68C5C1000000000000034A
+t1298712001
+s842
+
+CCheck dependencies
+r0
+lSLF07#2@18"Check dependencies320404818#320404818#0(0"0(0#1#0"30962664057340024#0"0#
+
+CCompileC build/ExpandHelpApp.build/Debug/ExpandHelpApp.build/Objects-normal/x86_64/main.o /Users/masui/ExpandHelpApp/main.m normal x86_64 objective-c com.apple.compilers.gcc.4_2
+s320404818.533418
+e320404819.082850
+r1
+xCompileC
+xbuild/ExpandHelpApp.build/Debug/ExpandHelpApp.build/Objects-normal/x86_64/main.o
+x/Users/masui/ExpandHelpApp/main.m
+xnormal
+xx86_64
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@41"Compile /Users/masui/ExpandHelpApp/main.m320404818#320404819#0(0"0(0#0#33"/Users/masui/ExpandHelpApp/main.m8607305312#919"    cd /Users/masui/ExpandHelpApp    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x objective-c -arch x86_64 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.5.sdk -mfix-and-continue -fobjc-gc-only -mmacosx-version-min=10.5 -gdwarf-2 -I/Users/masui/ExpandHelpApp/build/ExpandHelpApp.build/Debug/ExpandHelpApp.build/ExpandHelpApp.hmap -F/Users/masui/ExpandHelpApp/build/Debug -F/Users/masui/ExpandHelpApp/build/Debug -I/Users/masui/ExpandHelpApp/build/Debug/include -I/Users/masui/ExpandHelpApp/build/ExpandHelpApp.build/Debug/ExpandHelpApp.build/DerivedSources/x86_64 -I/Users/masui/ExpandHelpApp/build/ExpandHelpApp.build/Debug/ExpandHelpApp.build/DerivedSources -c /Users/masui/ExpandHelpApp/main.m -o /Users/masui/ExpandHelpApp/build/ExpandHelpApp.build/Debug/ExpandHelpApp.build/Objects-normal/x86_64/main.o0#
+
+CCompileXIB /Users/masui/ExpandHelpApp/English.lproj/MainMenu.xib
+s320404818.258803
+e320404818.533323
+r1
+xCompileXIB
+x/Users/masui/ExpandHelpApp/English.lproj/MainMenu.xib
+lSLF07#2@37"CompileXIB English.lproj/MainMenu.xib320404818#320404818#0(0"0(0#0#53"/Users/masui/ExpandHelpApp/English.lproj/MainMenu.xib8603774304#334"    cd /Users/masui/ExpandHelpApp    /Developer/usr/bin/ibtool --errors --warnings --notices --output-format human-readable-text --compile /Users/masui/ExpandHelpApp/build/Debug/ExpandHelpApp.app/Contents/Resources/English.lproj/MainMenu.nib /Users/masui/ExpandHelpApp/English.lproj/MainMenu.xib --sdk /Developer/SDKs/MacOSX10.5.sdk0#
+
+CCopyStringsFile /Users/masui/ExpandHelpApp/build/Debug/ExpandHelpApp.app/Contents/Resources/English.lproj/InfoPlist.strings English.lproj/InfoPlist.strings
+s320404818.257284
+e320404818.301510
+r1
+xCopyStringsFile
+x/Users/masui/ExpandHelpApp/build/Debug/ExpandHelpApp.app/Contents/Resources/English.lproj/InfoPlist.strings
+xEnglish.lproj/InfoPlist.strings
+lSLF07#2@36"Copy English.lproj/InfoPlist.strings320404818#320404818#0(0"0(0#0#58"/Users/masui/ExpandHelpApp/English.lproj/InfoPlist.strings8604077184#348"    cd /Users/masui/ExpandHelpApp    setenv ICONV /usr/bin/iconv    /Developer/Library/Xcode/Plug-ins/CoreBuildTasks.xcplugin/Contents/Resources/copystrings --validate --inputencoding utf-16 --outputencoding UTF-16 English.lproj/InfoPlist.strings --outdir /Users/masui/ExpandHelpApp/build/Debug/ExpandHelpApp.app/Contents/Resources/English.lproj0#
+
+CCpResource build/Debug/ExpandHelpApp.app/Contents/Resources/rb_main.rb rb_main.rb
+s320404818.258213
+e320404818.264104
+r1
+xCpResource
+xbuild/Debug/ExpandHelpApp.app/Contents/Resources/rb_main.rb
+xrb_main.rb
+lSLF07#2@15"Copy rb_main.rb320404818#320404818#0(0"0(0#0#37"/Users/masui/ExpandHelpApp/rb_main.rb8604021376#296"    cd /Users/masui/ExpandHelpApp    /Developer/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp -exclude .DS_Store -exclude CVS -exclude .svn -resolve-src-symlinks /Users/masui/ExpandHelpApp/rb_main.rb /Users/masui/ExpandHelpApp/build/Debug/ExpandHelpApp.app/Contents/Resources0#
+
+CLd /Users/masui/ExpandHelpApp/build/Debug/ExpandHelpApp.app/Contents/MacOS/ExpandHelpApp normal x86_64
+s320404819.083040
+e320404819.193885
+r1
+xLd
+x/Users/masui/ExpandHelpApp/build/Debug/ExpandHelpApp.app/Contents/MacOS/ExpandHelpApp
+xnormal
+xx86_64
+lSLF07#2@90"Link /Users/masui/ExpandHelpApp/build/Debug/ExpandHelpApp.app/Contents/MacOS/ExpandHelpApp320404819#320404819#0(0"0(0#0#0"8606869760#572"    cd /Users/masui/ExpandHelpApp    setenv MACOSX_DEPLOYMENT_TARGET 10.5    /Developer/usr/bin/gcc-4.2 -arch x86_64 -isysroot /Developer/SDKs/MacOSX10.5.sdk -L/Users/masui/ExpandHelpApp/build/Debug -F/Users/masui/ExpandHelpApp/build/Debug -F/Users/masui/ExpandHelpApp/build/Debug -filelist /Users/masui/ExpandHelpApp/build/ExpandHelpApp.build/Debug/ExpandHelpApp.build/Objects-normal/x86_64/ExpandHelpApp.LinkFileList -mmacosx-version-min=10.5 -framework Cocoa -framework MacRuby -o /Users/masui/ExpandHelpApp/build/Debug/ExpandHelpApp.app/Contents/MacOS/ExpandHelpApp0#
+
+CProcessInfoPlistFile /Users/masui/ExpandHelpApp/build/Debug/ExpandHelpApp.app/Contents/Info.plist Info.plist
+s320404818.243698
+e320404818.257145
+r1
+xProcessInfoPlistFile
+x/Users/masui/ExpandHelpApp/build/Debug/ExpandHelpApp.app/Contents/Info.plist
+xInfo.plist
+lSLF07#2@18"Process Info.plist320404818#320404818#0(0"0(0#0#37"/Users/masui/ExpandHelpApp/Info.plist31525614006435952#278"    cd /Users/masui/ExpandHelpApp    builtin-infoPlistUtility Info.plist -genpkginfo /Users/masui/ExpandHelpApp/build/Debug/ExpandHelpApp.app/Contents/PkgInfo -expandbuildsettings -platform macosx -o /Users/masui/ExpandHelpApp/build/Debug/ExpandHelpApp.app/Contents/Info.plist0#
+
+CTouch /Users/masui/ExpandHelpApp/build/Debug/ExpandHelpApp.app
+s320404819.193977
+e320404819.197488
+r1
+xTouch
+x/Users/masui/ExpandHelpApp/build/Debug/ExpandHelpApp.app
+lSLF07#2@62"Touch /Users/masui/ExpandHelpApp/build/Debug/ExpandHelpApp.app320404819#320404819#0(0"0(0#0#0"8607609632#113"    cd /Users/masui/ExpandHelpApp    /usr/bin/touch -c /Users/masui/ExpandHelpApp/build/Debug/ExpandHelpApp.app0#
+

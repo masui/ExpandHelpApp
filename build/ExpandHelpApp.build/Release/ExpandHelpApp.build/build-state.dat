@@ -1,0 +1,280 @@
+TExpandHelpApp
+v7
+r0
+t320460481.393977
+cCheck dependencies
+cProcessInfoPlistFile /Users/masui/ExpandHelpApp/build/Release/ExpandHelpApp.app/Contents/Info.plist Info.plist
+cCopyStringsFile /Users/masui/ExpandHelpApp/build/Release/ExpandHelpApp.app/Contents/Resources/English.lproj/InfoPlist.strings English.lproj/InfoPlist.strings
+cCpResource build/Release/ExpandHelpApp.app/Contents/Resources/rb_main.rb rb_main.rb
+cCompileXIB /Users/masui/ExpandHelpApp/English.lproj/MainMenu.xib
+cCpResource build/Release/ExpandHelpApp.app/Contents/Resources/Generator.rb Classes/Generator.rb
+cCpResource build/Release/ExpandHelpApp.app/Contents/Resources/Node.rb Classes/Node.rb
+cCpResource build/Release/ExpandHelpApp.app/Contents/Resources/Scanner.rb Classes/Scanner.rb
+cCpResource build/Release/ExpandHelpApp.app/Contents/Resources/ExpandHelp.rb Classes/ExpandHelp.rb
+cCpResource build/Release/ExpandHelpApp.app/Contents/Resources/HelpData.rb Classes/HelpData.rb
+cCompileC build/ExpandHelpApp.build/Release/ExpandHelpApp.build/Objects-normal/x86_64/main.o /Users/masui/ExpandHelpApp/main.m normal x86_64 objective-c com.apple.compilers.gcc.4_2
+cLd /Users/masui/ExpandHelpApp/build/Release/ExpandHelpApp.app/Contents/MacOS/ExpandHelpApp normal x86_64
+cGenerateDSYMFile /Users/masui/ExpandHelpApp/build/Release/ExpandHelpApp.app.dSYM /Users/masui/ExpandHelpApp/build/Release/ExpandHelpApp.app/Contents/MacOS/ExpandHelpApp
+cTouch /Users/masui/ExpandHelpApp/build/Release/ExpandHelpApp.app
+
+N/Developer/SDKs/MacOSX10.5.sdk
+c000000004C445C5F00000000000000EE
+t1279548511
+s238
+
+N/Developer/SDKs/MacOSX10.5.sdk/Library/Frameworks/MacRuby.framework/Headers/MacRuby.h
+c000000004D65A78C0000000000000106
+t1298507660
+s262
+
+N/Library/Frameworks/MacRuby.framework/MacRuby
+c000000004D6827A400000000014E8CA8
+t1298671524
+s21925032
+
+N/System/Library/Frameworks/Cocoa.framework/Cocoa
+c000000004C9D79C1000000000000A5E0
+t1285388737
+s42464
+
+N/Users/masui/ExpandHelpApp/Classes/ExpandHelp.rb
+c000000004D699F300000000000000401
+t1298767664
+s1025
+
+N/Users/masui/ExpandHelpApp/Classes/Generator.rb
+c000000004D69019F0000000000001121
+t1298727327
+s4385
+
+N/Users/masui/ExpandHelpApp/Classes/HelpData.rb
+c000000004D699D7700000000000004B1
+t1298767223
+s1201
+
+N/Users/masui/ExpandHelpApp/Classes/Node.rb
+c000000004D68C9CD00000000000002FD
+t1298713037
+s765
+
+N/Users/masui/ExpandHelpApp/Classes/Scanner.rb
+c000000004D68CA1D000000000000038B
+t1298713117
+s907
+
+N/Users/masui/ExpandHelpApp/English.lproj/InfoPlist.strings
+c000000004D68C5C100000000000000CA
+t1298712001
+s202
+
+N/Users/masui/ExpandHelpApp/English.lproj/MainMenu.xib
+c000000004D698CE500000000000232B5
+t1298762981
+s144053
+
+N/Users/masui/ExpandHelpApp/build/ExpandHelpApp.build/Release/ExpandHelpApp.build/Objects-normal/x86_64/ExpandHelpApp.LinkFileList
+c000000004D699F00000000000000006E
+t1298767616
+s110
+
+N/Users/masui/ExpandHelpApp/build/ExpandHelpApp.build/Release/ExpandHelpApp.build/Objects-normal/x86_64/main.o
+t1298767617
+s5420
+
+N/Users/masui/ExpandHelpApp/build/Release/ExpandHelpApp.app
+t1298767681
+s102
+
+N/Users/masui/ExpandHelpApp/build/Release/ExpandHelpApp.app.dSYM
+t1298767617
+s102
+
+N/Users/masui/ExpandHelpApp/build/Release/ExpandHelpApp.app/Contents/Info.plist
+t1298767616
+s787
+
+N/Users/masui/ExpandHelpApp/build/Release/ExpandHelpApp.app/Contents/MacOS/ExpandHelpApp
+t1298767617
+s9032
+
+N/Users/masui/ExpandHelpApp/build/Release/ExpandHelpApp.app/Contents/PkgInfo
+t1298767616
+s8
+
+N/Users/masui/ExpandHelpApp/build/Release/ExpandHelpApp.app/Contents/Resources/English.lproj/InfoPlist.strings
+t1298767616
+s202
+
+N/Users/masui/ExpandHelpApp/build/Release/ExpandHelpApp.app/Contents/Resources/English.lproj/MainMenu.nib
+t1298767616
+s26019
+
+N/Users/masui/ExpandHelpApp/build/Release/ExpandHelpApp.app/Contents/Resources/ExpandHelp.rb
+t1298767681
+s1025
+
+N/Users/masui/ExpandHelpApp/build/Release/ExpandHelpApp.app/Contents/Resources/Generator.rb
+t1298767616
+s4385
+
+N/Users/masui/ExpandHelpApp/build/Release/ExpandHelpApp.app/Contents/Resources/HelpData.rb
+t1298767616
+s1201
+
+N/Users/masui/ExpandHelpApp/build/Release/ExpandHelpApp.app/Contents/Resources/Node.rb
+t1298767616
+s765
+
+N/Users/masui/ExpandHelpApp/build/Release/ExpandHelpApp.app/Contents/Resources/Scanner.rb
+t1298767616
+s907
+
+N/Users/masui/ExpandHelpApp/build/Release/ExpandHelpApp.app/Contents/Resources/rb_main.rb
+t1298767616
+s627
+
+N/Users/masui/ExpandHelpApp/main.m
+c000000004D68C5C10000000000000103
+t1298712001
+s259
+i<MacRuby/MacRuby.h>
+
+N/Users/masui/ExpandHelpApp/rb_main.rb
+c000000004D68C5C10000000000000273
+t1298712001
+s627
+
+NInfo.plist
+c000000004D68C5C1000000000000034A
+t1298712001
+s842
+
+CCheck dependencies
+r0
+lSLF07#2@18"Check dependencies320460481#320460481#0(0"0(0#1#0"4992332684569364480#0"0#
+
+CCompileC build/ExpandHelpApp.build/Release/ExpandHelpApp.build/Objects-normal/x86_64/main.o /Users/masui/ExpandHelpApp/main.m normal x86_64 objective-c com.apple.compilers.gcc.4_2
+s320460416.829830
+e320460417.682544
+r1
+xCompileC
+xbuild/ExpandHelpApp.build/Release/ExpandHelpApp.build/Objects-normal/x86_64/main.o
+x/Users/masui/ExpandHelpApp/main.m
+xnormal
+xx86_64
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@41"Compile /Users/masui/ExpandHelpApp/main.m320460416#320460417#0(0"0(0#0#33"/Users/masui/ExpandHelpApp/main.m3275089324280537600#949"    cd /Users/masui/ExpandHelpApp    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x objective-c -arch x86_64 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -fasm-blocks -Os -mdynamic-no-pic -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.5.sdk -fobjc-gc-only -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -I/Users/masui/ExpandHelpApp/build/ExpandHelpApp.build/Release/ExpandHelpApp.build/ExpandHelpApp.hmap -F/Users/masui/ExpandHelpApp/build/Release -F/Users/masui/ExpandHelpApp/build/Debug -I/Users/masui/ExpandHelpApp/build/Release/include -I/Users/masui/ExpandHelpApp/build/ExpandHelpApp.build/Release/ExpandHelpApp.build/DerivedSources/x86_64 -I/Users/masui/ExpandHelpApp/build/ExpandHelpApp.build/Release/ExpandHelpApp.build/DerivedSources -c /Users/masui/ExpandHelpApp/main.m -o /Users/masui/ExpandHelpApp/build/ExpandHelpApp.build/Release/ExpandHelpApp.build/Objects-normal/x86_64/main.o0#
+
+CCompileXIB /Users/masui/ExpandHelpApp/English.lproj/MainMenu.xib
+s320460416.359195
+e320460416.829670
+r1
+xCompileXIB
+x/Users/masui/ExpandHelpApp/English.lproj/MainMenu.xib
+o/* com.apple.ibtool.document.warnings */
+o/Users/masui/ExpandHelpApp/English.lproj/MainMenu.xib:477: warning: Image scaling is not supported on Mac OS X versions prior to 10.5.
+o/Users/masui/ExpandHelpApp/English.lproj/MainMenu.xib:449: warning: "Hidden" option will be ignored on Mac OS X versions prior to 10.3.
+o/Users/masui/ExpandHelpApp/English.lproj/MainMenu.xib:447: warning: The "Automatically Hide Scrollers" option will be ignored on Mac OS X versions prior to 10.3.
+o/Users/masui/ExpandHelpApp/English.lproj/MainMenu.xib:448: warning: "Hidden" option will be ignored on Mac OS X versions prior to 10.3.
+lSLF07#2@37"CompileXIB English.lproj/MainMenu.xib320460416#320460416#0(610"/* com.apple.ibtool.document.warnings *//Users/masui/ExpandHelpApp/English.lproj/MainMenu.xib:477: warning: Image scaling is not supported on Mac OS X versions prior to 10.5./Users/masui/ExpandHelpApp/English.lproj/MainMenu.xib:449: warning: "Hidden" option will be ignored on Mac OS X versions prior to 10.3./Users/masui/ExpandHelpApp/English.lproj/MainMenu.xib:447: warning: The "Automatically Hide Scrollers" option will be ignored on Mac OS X versions prior to 10.3./Users/masui/ExpandHelpApp/English.lproj/MainMenu.xib:448: warning: "Hidden" option will be ignored on Mac OS X versions prior to 10.3.4(22@66"Image scaling is not supported on Mac OS X versions prior to 10.5.320460416#18446744073709551615#0#0(6@53"/Users/masui/ExpandHelpApp/English.lproj/MainMenu.xib320455781#477#0#477#0#0"0(22@67""Hidden" option will be ignored on Mac OS X versions prior to 10.3.320460416#18446744073709551615#0#0(6@53"/Users/masui/ExpandHelpApp/English.lproj/MainMenu.xib320455781#449#0#449#0#0"0(22@93"The "Automatically Hide Scrollers" option will be ignored on Mac OS X versions prior to 10.3.320460416#18446744073709551615#0#0(6@53"/Users/masui/ExpandHelpApp/English.lproj/MainMenu.xib320455781#447#0#447#0#0"0(22@67""Hidden" option will be ignored on Mac OS X versions prior to 10.3.320460416#18446744073709551615#0#0(6@53"/Users/masui/ExpandHelpApp/English.lproj/MainMenu.xib320455781#448#0#448#0#0"0(0#0#53"/Users/masui/ExpandHelpApp/English.lproj/MainMenu.xib4646381152#336"    cd /Users/masui/ExpandHelpApp    /Developer/usr/bin/ibtool --errors --warnings --notices --output-format human-readable-text --compile /Users/masui/ExpandHelpApp/build/Release/ExpandHelpApp.app/Contents/Resources/English.lproj/MainMenu.nib /Users/masui/ExpandHelpApp/English.lproj/MainMenu.xib --sdk /Developer/SDKs/MacOSX10.5.sdk0#
+
+CCopyStringsFile /Users/masui/ExpandHelpApp/build/Release/ExpandHelpApp.app/Contents/Resources/English.lproj/InfoPlist.strings English.lproj/InfoPlist.strings
+s320460416.356336
+e320460416.488988
+r1
+xCopyStringsFile
+x/Users/masui/ExpandHelpApp/build/Release/ExpandHelpApp.app/Contents/Resources/English.lproj/InfoPlist.strings
+xEnglish.lproj/InfoPlist.strings
+lSLF07#2@36"Copy English.lproj/InfoPlist.strings320460416#320460416#0(0"0(0#0#58"/Users/masui/ExpandHelpApp/English.lproj/InfoPlist.strings4373358528#350"    cd /Users/masui/ExpandHelpApp    setenv ICONV /usr/bin/iconv    /Developer/Library/Xcode/Plug-ins/CoreBuildTasks.xcplugin/Contents/Resources/copystrings --validate --inputencoding utf-16 --outputencoding UTF-16 English.lproj/InfoPlist.strings --outdir /Users/masui/ExpandHelpApp/build/Release/ExpandHelpApp.app/Contents/Resources/English.lproj0#
+
+CCpResource build/Release/ExpandHelpApp.app/Contents/Resources/ExpandHelp.rb Classes/ExpandHelp.rb
+s320460481.380617
+e320460481.390428
+r1
+xCpResource
+xbuild/Release/ExpandHelpApp.app/Contents/Resources/ExpandHelp.rb
+xClasses/ExpandHelp.rb
+lSLF07#2@26"Copy Classes/ExpandHelp.rb320460481#320460481#0(0"0(0#0#48"/Users/masui/ExpandHelpApp/Classes/ExpandHelp.rb30962724183932976#330"    cd /Users/masui/ExpandHelpApp    /Developer/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp -exclude .DS_Store -exclude CVS -exclude .svn -strip-debug-symbols -resolve-src-symlinks /Users/masui/ExpandHelpApp/Classes/ExpandHelp.rb /Users/masui/ExpandHelpApp/build/Release/ExpandHelpApp.app/Contents/Resources0#
+
+CCpResource build/Release/ExpandHelpApp.app/Contents/Resources/Generator.rb Classes/Generator.rb
+s320460416.489084
+e320460416.508564
+r1
+xCpResource
+xbuild/Release/ExpandHelpApp.app/Contents/Resources/Generator.rb
+xClasses/Generator.rb
+lSLF07#2@25"Copy Classes/Generator.rb320460416#320460416#0(0"0(0#0#47"/Users/masui/ExpandHelpApp/Classes/Generator.rb4373373440#329"    cd /Users/masui/ExpandHelpApp    /Developer/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp -exclude .DS_Store -exclude CVS -exclude .svn -strip-debug-symbols -resolve-src-symlinks /Users/masui/ExpandHelpApp/Classes/Generator.rb /Users/masui/ExpandHelpApp/build/Release/ExpandHelpApp.app/Contents/Resources0#
+
+CCpResource build/Release/ExpandHelpApp.app/Contents/Resources/HelpData.rb Classes/HelpData.rb
+s320460416.507548
+e320460416.514935
+r1
+xCpResource
+xbuild/Release/ExpandHelpApp.app/Contents/Resources/HelpData.rb
+xClasses/HelpData.rb
+lSLF07#2@24"Copy Classes/HelpData.rb320460416#320460416#0(0"0(0#0#46"/Users/masui/ExpandHelpApp/Classes/HelpData.rb4647451856#328"    cd /Users/masui/ExpandHelpApp    /Developer/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp -exclude .DS_Store -exclude CVS -exclude .svn -strip-debug-symbols -resolve-src-symlinks /Users/masui/ExpandHelpApp/Classes/HelpData.rb /Users/masui/ExpandHelpApp/build/Release/ExpandHelpApp.app/Contents/Resources0#
+
+CCpResource build/Release/ExpandHelpApp.app/Contents/Resources/Node.rb Classes/Node.rb
+s320460416.495383
+e320460416.508898
+r1
+xCpResource
+xbuild/Release/ExpandHelpApp.app/Contents/Resources/Node.rb
+xClasses/Node.rb
+lSLF07#2@20"Copy Classes/Node.rb320460416#320460416#0(0"0(0#0#42"/Users/masui/ExpandHelpApp/Classes/Node.rb4373385440#324"    cd /Users/masui/ExpandHelpApp    /Developer/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp -exclude .DS_Store -exclude CVS -exclude .svn -strip-debug-symbols -resolve-src-symlinks /Users/masui/ExpandHelpApp/Classes/Node.rb /Users/masui/ExpandHelpApp/build/Release/ExpandHelpApp.app/Contents/Resources0#
+
+CCpResource build/Release/ExpandHelpApp.app/Contents/Resources/Scanner.rb Classes/Scanner.rb
+s320460416.500805
+e320460416.509424
+r1
+xCpResource
+xbuild/Release/ExpandHelpApp.app/Contents/Resources/Scanner.rb
+xClasses/Scanner.rb
+lSLF07#2@23"Copy Classes/Scanner.rb320460416#320460416#0(0"0(0#0#45"/Users/masui/ExpandHelpApp/Classes/Scanner.rb4373525296#327"    cd /Users/masui/ExpandHelpApp    /Developer/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp -exclude .DS_Store -exclude CVS -exclude .svn -strip-debug-symbols -resolve-src-symlinks /Users/masui/ExpandHelpApp/Classes/Scanner.rb /Users/masui/ExpandHelpApp/build/Release/ExpandHelpApp.app/Contents/Resources0#
+
+CCpResource build/Release/ExpandHelpApp.app/Contents/Resources/rb_main.rb rb_main.rb
+s320460416.357803
+e320460416.364117
+r1
+xCpResource
+xbuild/Release/ExpandHelpApp.app/Contents/Resources/rb_main.rb
+xrb_main.rb
+lSLF07#2@15"Copy rb_main.rb320460416#320460416#0(0"0(0#0#37"/Users/masui/ExpandHelpApp/rb_main.rb4647445712#319"    cd /Users/masui/ExpandHelpApp    /Developer/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp -exclude .DS_Store -exclude CVS -exclude .svn -strip-debug-symbols -resolve-src-symlinks /Users/masui/ExpandHelpApp/rb_main.rb /Users/masui/ExpandHelpApp/build/Release/ExpandHelpApp.app/Contents/Resources0#
+
+CGenerateDSYMFile /Users/masui/ExpandHelpApp/build/Release/ExpandHelpApp.app.dSYM /Users/masui/ExpandHelpApp/build/Release/ExpandHelpApp.app/Contents/MacOS/ExpandHelpApp
+s320460417.805759
+e320460417.834022
+r1
+xGenerateDSYMFile
+x/Users/masui/ExpandHelpApp/build/Release/ExpandHelpApp.app.dSYM
+x/Users/masui/ExpandHelpApp/build/Release/ExpandHelpApp.app/Contents/MacOS/ExpandHelpApp
+lSLF07#2@114"GenerateDSYMFile build/Release/ExpandHelpApp.app.dSYM build/Release/ExpandHelpApp.app/Contents/MacOS/ExpandHelpApp320460417#320460417#0(0"0(0#0#87"/Users/masui/ExpandHelpApp/build/Release/ExpandHelpApp.app/Contents/MacOS/ExpandHelpApp4646293856#221"    cd /Users/masui/ExpandHelpApp    /Developer/usr/bin/dsymutil /Users/masui/ExpandHelpApp/build/Release/ExpandHelpApp.app/Contents/MacOS/ExpandHelpApp -o /Users/masui/ExpandHelpApp/build/Release/ExpandHelpApp.app.dSYM0#
+
+CLd /Users/masui/ExpandHelpApp/build/Release/ExpandHelpApp.app/Contents/MacOS/ExpandHelpApp normal x86_64
+s320460417.682727
+e320460417.805070
+r1
+xLd
+x/Users/masui/ExpandHelpApp/build/Release/ExpandHelpApp.app/Contents/MacOS/ExpandHelpApp
+xnormal
+xx86_64
+lSLF07#2@92"Link /Users/masui/ExpandHelpApp/build/Release/ExpandHelpApp.app/Contents/MacOS/ExpandHelpApp320460417#320460417#0(0"0(0#0#0"4373359600#580"    cd /Users/masui/ExpandHelpApp    setenv MACOSX_DEPLOYMENT_TARGET 10.5    /Developer/usr/bin/gcc-4.2 -arch x86_64 -isysroot /Developer/SDKs/MacOSX10.5.sdk -L/Users/masui/ExpandHelpApp/build/Release -F/Users/masui/ExpandHelpApp/build/Release -F/Users/masui/ExpandHelpApp/build/Debug -filelist /Users/masui/ExpandHelpApp/build/ExpandHelpApp.build/Release/ExpandHelpApp.build/Objects-normal/x86_64/ExpandHelpApp.LinkFileList -mmacosx-version-min=10.5 -framework Cocoa -framework MacRuby -o /Users/masui/ExpandHelpApp/build/Release/ExpandHelpApp.app/Contents/MacOS/ExpandHelpApp0#
+
+CProcessInfoPlistFile /Users/masui/ExpandHelpApp/build/Release/ExpandHelpApp.app/Contents/Info.plist Info.plist
+s320460416.337762
+e320460416.352879
+r1
+xProcessInfoPlistFile
+x/Users/masui/ExpandHelpApp/build/Release/ExpandHelpApp.app/Contents/Info.plist
+xInfo.plist
+lSLF07#2@18"Process Info.plist320460416#320460416#0(0"0(0#0#37"/Users/masui/ExpandHelpApp/Info.plist12948329972367424#282"    cd /Users/masui/ExpandHelpApp    builtin-infoPlistUtility Info.plist -genpkginfo /Users/masui/ExpandHelpApp/build/Release/ExpandHelpApp.app/Contents/PkgInfo -expandbuildsettings -platform macosx -o /Users/masui/ExpandHelpApp/build/Release/ExpandHelpApp.app/Contents/Info.plist0#
+
+CTouch /Users/masui/ExpandHelpApp/build/Release/ExpandHelpApp.app
+s320460481.390834
+e320460481.393889
+r1
+xTouch
+x/Users/masui/ExpandHelpApp/build/Release/ExpandHelpApp.app
+lSLF07#2@64"Touch /Users/masui/ExpandHelpApp/build/Release/ExpandHelpApp.app320460481#320460481#0(0"0(0#0#0"4642364784#115"    cd /Users/masui/ExpandHelpApp    /usr/bin/touch -c /Users/masui/ExpandHelpApp/build/Release/ExpandHelpApp.app0#
+

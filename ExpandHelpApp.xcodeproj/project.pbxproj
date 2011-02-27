@@ -54,6 +54,8 @@
 		CE8B3E16131901BE001FF15A /* Scanner.rb in Resources */ = {isa = PBXBuildFile; fileRef = CE8B3E15131901BE001FF15A /* Scanner.rb */; };
 		CE8B3E2B13191CC4001FF15A /* ExpandHelp.rb in Resources */ = {isa = PBXBuildFile; fileRef = CE8B3E2A13191CC4001FF15A /* ExpandHelp.rb */; };
 		CE8B3FE51319CB3A001FF15A /* HelpData.rb in Resources */ = {isa = PBXBuildFile; fileRef = CE8B3FE41319CB3A001FF15A /* HelpData.rb */; };
+		CE8B411F131A6C4D001FF15A /* alarm.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = CE8B411E131A6C4D001FF15A /* alarm.mp3 */; };
+		CE8B414D131A8168001FF15A /* Lib.rb in Resources */ = {isa = PBXBuildFile; fileRef = CE8B414C131A8168001FF15A /* Lib.rb */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -87,6 +89,8 @@
 		CE8B3E15131901BE001FF15A /* Scanner.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; name = Scanner.rb; path = Classes/Scanner.rb; sourceTree = "<group>"; };
 		CE8B3E2A13191CC4001FF15A /* ExpandHelp.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; name = ExpandHelp.rb; path = Classes/ExpandHelp.rb; sourceTree = "<group>"; };
 		CE8B3FE41319CB3A001FF15A /* HelpData.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; name = HelpData.rb; path = Classes/HelpData.rb; sourceTree = "<group>"; };
+		CE8B411E131A6C4D001FF15A /* alarm.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = alarm.mp3; sourceTree = "<group>"; };
+		CE8B414C131A8168001FF15A /* Lib.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; name = Lib.rb; path = Classes/Lib.rb; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +112,7 @@
 				CE8B3E15131901BE001FF15A /* Scanner.rb */,
 				CE8B3DF31318FE4D001FF15A /* Generator.rb */,
 				CE8B3E0F13190174001FF15A /* Node.rb */,
+				CE8B414C131A8168001FF15A /* Lib.rb */,
 				CE8B3E2A13191CC4001FF15A /* ExpandHelp.rb */,
 				CE8B3FE41319CB3A001FF15A /* HelpData.rb */,
 			);
@@ -176,6 +181,7 @@
 			isa = PBXGroup;
 			children = (
 				2BFA9DA510CDF852007972A1 /* MainMenu.xib */,
+				CE8B411E131A6C4D001FF15A /* alarm.mp3 */,
 				8D1107310486CEB800E47090 /* Info.plist */,
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
 			);
@@ -253,6 +259,8 @@
 				CE8B3E16131901BE001FF15A /* Scanner.rb in Resources */,
 				CE8B3E2B13191CC4001FF15A /* ExpandHelp.rb in Resources */,
 				CE8B3FE51319CB3A001FF15A /* HelpData.rb in Resources */,
+				CE8B411F131A6C4D001FF15A /* alarm.mp3 in Resources */,
+				CE8B414D131A8168001FF15A /* Lib.rb in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

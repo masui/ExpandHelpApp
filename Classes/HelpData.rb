@@ -55,7 +55,7 @@ class HelpData
        ['現在のディレクトリのファイルをリストする',
         '`ls -l`'],
        ['(#{ls})というファイルを見る',
-        'cat("#{$1}")'],
+        'show "#{$1}"'],
        ['tmpディレクトリに移動する',
         'chdir("/tmp"); `ls -l`'],
        ['(#{station})駅から(#{station})駅までの電車(の(時刻|時間))を調べる',
@@ -67,6 +67,22 @@ class HelpData
         '`open http://twitter.com/`'],
        ['アラームを鳴らす',
         'alarm'],
+
+       # 文書を編集する
+       ['(#{ls})というファイルをEmacsエディタで開く',
+        '`open "#{$1}" -a emacs`'],
+       # 文書を編集する
+       ['(#{ls})というファイルをEmacsエディタで編集する',
+        '`open "#{$1}" -a emacs`'],
+       # 新しいファイルを作るとき困るのね
+
+       # ブラウザを起動する
+       ['Firefox(ブラウザ)を(起動する|動かす|使う|走らせる)',
+        '`open -a firefox`'],
+       # "abc fire"
+       # abc.htmlというファイルをfirefoxで開く
+       ['(#{ls})というファイルをFirefox(ブラウザ)で開く',
+        '`open "#{$1}" -a firefox`'],
       ]
     @cwd = ENV['HOME']
   end

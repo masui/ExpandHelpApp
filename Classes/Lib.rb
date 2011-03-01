@@ -29,7 +29,7 @@ def ls
   }.join("|")
 end
 
-def cat(file)
+def show(file)
   File.read(file)
 end
 

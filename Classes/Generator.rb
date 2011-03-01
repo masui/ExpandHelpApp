@@ -175,7 +175,7 @@ class Generator
             /#{patstr}/ =~ b.join("\t")
             matched = true
             patterns.each { |pat|
-              if !s.index(pat) then
+              if !s.downcase.index(pat.downcase) then
                 matched = false
                 break
               end

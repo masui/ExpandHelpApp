@@ -56,6 +56,10 @@
 		CE8B3FE51319CB3A001FF15A /* HelpData.rb in Resources */ = {isa = PBXBuildFile; fileRef = CE8B3FE41319CB3A001FF15A /* HelpData.rb */; };
 		CE8B411F131A6C4D001FF15A /* alarm.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = CE8B411E131A6C4D001FF15A /* alarm.mp3 */; };
 		CE8B414D131A8168001FF15A /* Lib.rb in Resources */ = {isa = PBXBuildFile; fileRef = CE8B414C131A8168001FF15A /* Lib.rb */; };
+		CE9DC0791321CA3C00F96ADC /* app.tiff in Resources */ = {isa = PBXBuildFile; fileRef = CE9DC0781321CA3C00F96ADC /* app.tiff */; };
+		CE9DC0BC1321D39500F96ADC /* StatusView.rb in Resources */ = {isa = PBXBuildFile; fileRef = CE9DC0BB1321D39500F96ADC /* StatusView.rb */; };
+		CE9DC0F7132231C000F96ADC /* mountains.png in Resources */ = {isa = PBXBuildFile; fileRef = CE9DC0F6132231C000F96ADC /* mountains.png */; };
+		CE9DC1AD13224E6500F96ADC /* QueryWindow.rb in Resources */ = {isa = PBXBuildFile; fileRef = CE9DC1AC13224E6500F96ADC /* QueryWindow.rb */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -91,6 +95,10 @@
 		CE8B3FE41319CB3A001FF15A /* HelpData.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; name = HelpData.rb; path = Classes/HelpData.rb; sourceTree = "<group>"; };
 		CE8B411E131A6C4D001FF15A /* alarm.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = alarm.mp3; sourceTree = "<group>"; };
 		CE8B414C131A8168001FF15A /* Lib.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; name = Lib.rb; path = Classes/Lib.rb; sourceTree = "<group>"; };
+		CE9DC0781321CA3C00F96ADC /* app.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = app.tiff; sourceTree = "<group>"; };
+		CE9DC0BB1321D39500F96ADC /* StatusView.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; name = StatusView.rb; path = Classes/StatusView.rb; sourceTree = "<group>"; };
+		CE9DC0F6132231C000F96ADC /* mountains.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = mountains.png; path = ../Desktop/mountains.png; sourceTree = SOURCE_ROOT; };
+		CE9DC1AC13224E6500F96ADC /* QueryWindow.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; name = QueryWindow.rb; path = Classes/QueryWindow.rb; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +123,8 @@
 				CE8B414C131A8168001FF15A /* Lib.rb */,
 				CE8B3E2A13191CC4001FF15A /* ExpandHelp.rb */,
 				CE8B3FE41319CB3A001FF15A /* HelpData.rb */,
+				CE9DC0BB1321D39500F96ADC /* StatusView.rb */,
+				CE9DC1AC13224E6500F96ADC /* QueryWindow.rb */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -180,6 +190,8 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				CE9DC0F6132231C000F96ADC /* mountains.png */,
+				CE9DC0781321CA3C00F96ADC /* app.tiff */,
 				2BFA9DA510CDF852007972A1 /* MainMenu.xib */,
 				CE8B411E131A6C4D001FF15A /* alarm.mp3 */,
 				8D1107310486CEB800E47090 /* Info.plist */,
@@ -261,6 +273,10 @@
 				CE8B3FE51319CB3A001FF15A /* HelpData.rb in Resources */,
 				CE8B411F131A6C4D001FF15A /* alarm.mp3 in Resources */,
 				CE8B414D131A8168001FF15A /* Lib.rb in Resources */,
+				CE9DC0791321CA3C00F96ADC /* app.tiff in Resources */,
+				CE9DC0BC1321D39500F96ADC /* StatusView.rb in Resources */,
+				CE9DC0F7132231C000F96ADC /* mountains.png in Resources */,
+				CE9DC1AD13224E6500F96ADC /* QueryWindow.rb in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

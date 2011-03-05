@@ -19,6 +19,11 @@ class ExpandHelp
   attr_accessor :command         # 実行するUnixコマンド
   attr_accessor :commandoutput   # Unixコマンドの実行結果
   attr_accessor :cwd             # 現在のディレクトリ
+  attr_accessor :window          # アプリのウィンドウ
+  attr_accessor :statusview
+
+  attr_accessor :queryview
+  attr_accessor :querywindow
 	
   def initialize
     @helpdata = HelpData.new
@@ -26,10 +31,59 @@ class ExpandHelp
     @list = []
   end
 
+  # IBデータを読み込んだ後で呼ばれる
   def awakeFromNib
     chdir(ENV['HOME'])
-#    @cwd.setStringValue(ENV['HOME'])
-#    Dir.chdir(@cwd.stringValue)
+
+    # ステータスバー
+    systemStatusBar = NSStatusBar.systemStatusBar
+    statusItem = systemStatusBar.statusItemWithLength(NSVariableStatusItemLength)
+
+p statusItem.statusBar.thickness
+p @statusview
+    statusItem.setView(@statusview)
+
+    posy = @statusview.window.frame.origin.y
+    posx = @statusview.window.frame.origin.x
+    y = posy - @window.frame.size.height
+    x = posx
+    @window.setFrameOrigin(NSPoint.new(x,y-122))
+
+    rect = NSZeroRect
+    rect.size = @queryview.frame.size;
+    mask = @querywindow.styleMask
+    #
+    # enum {
+    #    NSBorderlessWindowMask = 0,
+    #    NSTitledWindowMask = 1 << 0,
+    #    NSClosableWindowMask = 1 << 1,
+    #    NSMiniaturizableWindowMask = 1 << 2,
+    #    NSResizableWindowMask = 1 << 3,
+    #    NSTexturedBackgroundWindowMask = 1 << 8
+    # };
+    mask = 0b0000
+    @querywindow.initWithContentRect(rect,
+                                     styleMask:mask,
+                                     backing:NSBackingStoreBuffered,
+                                     defer:false)
+#    @querywindow.makeKeyWindow
+    @querywindow.contentView.addSubview(@queryview)
+    @querywindow.setBackgroundColor(NSColor.clearColor)
+    @querywindow.setMovableByWindowBackground(false)
+    @querywindow.setExcludedFromWindowsMenu(true)
+    @querywindow.setAlphaValue(1.0)
+    @querywindow.setOpaque(false)
+    @querywindow.setHasShadow(true)
+    @querywindow.useOptimizedDrawing(true)
+    posy = @statusview.window.frame.origin.y
+    posx = @statusview.window.frame.origin.x
+    y = posy - @querywindow.frame.size.height
+    x = posx
+    @querywindow.setFrameOrigin(NSPoint.new(x,y))
+
+    # GCされないためのハック
+    @@xxx = statusItem
+
   end
 
   def chdir(dir)
@@ -57,8 +111,9 @@ class ExpandHelp
     end
   end
 
-  # NSTableView Tutorial
+  # NSTableView Tutorial を参考にしている
   # http://www.cocoadev.com/index.pl?NSTableViewTutorial
+  # 以下のふたつのメソッドを定義しておけばテーブルが表示されるようだ
 
   def numberOfRowsInTableView(table)
     @table = table
@@ -80,15 +135,10 @@ class ExpandHelp
     @commandoutput.cut(sender)
     s = eval @command.stringValue
     @commandoutput.insertText(s.to_s)
-#    @commandoutput.insertText(`#{@command.stringValue}`)
-
     chdir(@helpdata.cwd)
   end
 
-  def keyDown(event) # ???
-    puts event
-  end
-
+  # NSTextViewが編集されると勝手に呼ばれる
   def textDidChange(notification)
     puts notification
     @shouldgenerate = true

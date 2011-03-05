@@ -19,11 +19,16 @@ class StatusView < NSView
   def mouseDown(event)
     puts "mouseDown"
     if @visible then
-      app.queryview.removeFromSuperview
-      app.querywindow.setHasShadow(false)
+      p app.statusItem
+      app.statusItem.setHighlightMode(false)
+      app.hideQueryView
+      app.hideOutputView
+      app.hideTableView
     else
-      app.querywindow.contentView.addSubview(app.queryview)
-      app.querywindow.setHasShadow(true)
+      app.statusItem.setHighlightMode(true)
+      app.showQueryView
+      app.showOutputView
+      app.showTableView
     end
     @visible = !@visible
   end

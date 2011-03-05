@@ -16,14 +16,22 @@ require 'Lib'
 class ExpandHelp
   attr_accessor :input           # ヘルプキーワード入力枠
   attr_accessor :table           # 検索結果
-  attr_accessor :command         # 実行するUnixコマンド
+#  attr_accessor :command         # 実行するUnixコマンド
   attr_accessor :commandoutput   # Unixコマンドの実行結果
   attr_accessor :cwd             # 現在のディレクトリ
   attr_accessor :window          # アプリのウィンドウ
-  attr_accessor :statusview
+  attr_accessor :statusview      # ステータスバー上に表示するアイコンのビュー
 
-  attr_accessor :queryview
-  attr_accessor :querywindow
+  attr_accessor :queryview       # ヘルプキーワード入力ビュー
+  attr_accessor :querywindow     # ヘルプキーワード入力ウィンドウ
+
+  attr_accessor :tablewindow     # 検索結果表示ウィンドウ
+  attr_accessor :tableview       # 検索結果表示ビュー
+	
+  attr_accessor :outputwindow     # 出力表示ウィンドウ
+  attr_accessor :outputview       # 出力結果表示ビュー
+
+  attr_accessor :statusItem
 	
   def initialize
     @helpdata = HelpData.new
@@ -37,18 +45,22 @@ class ExpandHelp
 
     # ステータスバー
     systemStatusBar = NSStatusBar.systemStatusBar
-    statusItem = systemStatusBar.statusItemWithLength(NSVariableStatusItemLength)
+    @statusItem = systemStatusBar.statusItemWithLength(NSVariableStatusItemLength)
+    @statusItem.setHighlightMode(true)
+    # p statusItem.statusBar.thickness
+    #
+    # アイコンを表示し、ステータスバーの位置を取得するために
+    # 特別にNSViewを利用する
+    #
+    # p @statusview
+    # @statusItem.setTitle("abc")
+    @statusItem.setView(@statusview)
+    statusViewPosy = @statusview.window.frame.origin.y
+    statusViewPosx = @statusview.window.frame.origin.x
 
-p statusItem.statusBar.thickness
-p @statusview
-    statusItem.setView(@statusview)
-
-    posy = @statusview.window.frame.origin.y
-    posx = @statusview.window.frame.origin.x
-    y = posy - @window.frame.size.height
-    x = posx
-    @window.setFrameOrigin(NSPoint.new(x,y-122))
-
+    #
+    # キーワード入力ウィンドウを作成
+    #
     rect = NSZeroRect
     rect.size = @queryview.frame.size;
     mask = @querywindow.styleMask
@@ -75,14 +87,64 @@ p @statusview
     @querywindow.setOpaque(false)
     @querywindow.setHasShadow(true)
     @querywindow.useOptimizedDrawing(true)
-    posy = @statusview.window.frame.origin.y
-    posx = @statusview.window.frame.origin.x
-    y = posy - @querywindow.frame.size.height
-    x = posx
+    y = statusViewPosy - @querywindow.frame.size.height
+    x = statusViewPosx
     @querywindow.setFrameOrigin(NSPoint.new(x,y))
 
+    #
+    # 検索結果表示ウィンドウを作成
+    #
+    rect = NSZeroRect
+    rect.size = @tableview.frame.size;
+    mask = 0b0000
+    @tablewindow.initWithContentRect(rect,
+                                     styleMask:mask,
+                                     backing:NSBackingStoreBuffered,
+                                     defer:false)
+    @tablewindow.contentView.addSubview(@tableview)
+    @tablewindow.setBackgroundColor(NSColor.clearColor)
+    @tablewindow.setMovableByWindowBackground(false)
+    @tablewindow.setExcludedFromWindowsMenu(true)
+    @tablewindow.setAlphaValue(1.0)
+    @tablewindow.setOpaque(false)
+    @tablewindow.setHasShadow(true)
+    @tablewindow.useOptimizedDrawing(true)
+    posy = @querywindow.frame.origin.y
+    posx = @querywindow.frame.origin.x
+    y = posy - @tablewindow.frame.size.height
+    x = posx
+    @tablewindow.setFrameOrigin(NSPoint.new(x,y+22))
+
+    hideTableView
+
+    #
+    # 出力表示ウィンドウを作成
+    #
+    rect = NSZeroRect
+    rect.size = @outputview.frame.size;
+    mask = 0b0000
+    @outputwindow.initWithContentRect(rect,
+                                     styleMask:mask,
+                                     backing:NSBackingStoreBuffered,
+                                     defer:false)
+    @outputwindow.contentView.addSubview(@outputview)
+    @outputwindow.setBackgroundColor(NSColor.clearColor)
+    @outputwindow.setMovableByWindowBackground(false)
+    @outputwindow.setExcludedFromWindowsMenu(true)
+    @outputwindow.setAlphaValue(1.0)
+    @outputwindow.setOpaque(false)
+    @outputwindow.setHasShadow(true)
+    @outputwindow.useOptimizedDrawing(true)
+    posy = @querywindow.frame.origin.y
+    posx = @querywindow.frame.origin.x
+    y = posy - @outputwindow.frame.size.height
+    x = posx
+    @outputwindow.setFrameOrigin(NSPoint.new(x,y+22))
+
+    hideOutputView
+
     # GCされないためのハック
-    @@xxx = statusItem
+    @@xxx = @statusItem
 
   end
 
@@ -106,6 +168,10 @@ p @statusview
         #   @list = @generator.generate(@input.stringValue)
         @list = @generator.generate(@input.string)
         @table.reloadData
+        @tableShouldBeShown = true
+        showTableView
+        @outputShouldBeShown = false
+        hideOutputView
       end
       @generating = false
     end
@@ -113,7 +179,8 @@ p @statusview
 
   # NSTableView Tutorial を参考にしている
   # http://www.cocoadev.com/index.pl?NSTableViewTutorial
-  # 以下のふたつのメソッドを定義しておけばテーブルが表示されるようだ
+  # 以下のふたつのメソッドを定義しておけばテーブルが表示されるようだ。
+  # IBで、tableからこのオブジェクトをdataSource, delegateとして登録しておく。
 
   def numberOfRowsInTableView(table)
     @table = table
@@ -127,21 +194,70 @@ p @statusview
   
   # table要素がクリックされたとき呼ばれる
   def selected(sender)
-    @command.setStringValue(@list[sender.selectedRow][1])
+    if @prevSelected == sender.selectedRow then
+      execute(sender)
+    end
+    @prevSelected = sender.selectedRow
+    # @command.setStringValue(@list[sender.selectedRow][1])
+    @commandString = @list[sender.selectedRow][1]
   end
 
   def execute(sender)
-    @commandoutput.selectAll(sender)
-    @commandoutput.cut(sender)
-    s = eval @command.stringValue
-    @commandoutput.insertText(s.to_s)
+    s = eval @commandString
+    if s.gsub(/\s/,'') != '' then
+      @commandoutput.selectAll(sender)
+      @commandoutput.cut(sender)
+      @commandoutput.insertText(s.to_s)
+      @outputShouldBeShown = true
+      showOutputView
+    end
     chdir(@helpdata.cwd)
+    @tableShouldBeShown = false
+    hideTableView
   end
 
   # NSTextViewが編集されると勝手に呼ばれる
   def textDidChange(notification)
-    puts notification
+    @tableShouldBeShown = false
+    hideTableView
     @shouldgenerate = true
     generate(nil) unless @generating
+  end
+
+  def showQueryView
+    @querywindow.contentView.addSubview(@queryview)
+    @querywindow.setHasShadow(true)
+    @querywindow.orderFront(self)
+  end
+
+  def hideQueryView
+    @queryview.removeFromSuperview
+    @querywindow.setHasShadow(false)
+  end
+
+  def showTableView
+    if @tableShouldBeShown then
+      @tablewindow.contentView.addSubview(@tableview)
+      @tablewindow.setHasShadow(true)
+      @tablewindow.orderFront(self)
+    end
+  end
+
+  def hideTableView
+    @tableview.removeFromSuperview
+    @tablewindow.setHasShadow(false)
+  end
+
+  def showOutputView
+    if @outputShouldBeShown then
+      @outputwindow.contentView.addSubview(@outputview)
+      @outputwindow.setHasShadow(true)
+      @outputwindow.orderFront(self)
+    end
+  end
+
+  def hideOutputView
+    @outputview.removeFromSuperview
+    @outputwindow.setHasShadow(false)
   end
 end

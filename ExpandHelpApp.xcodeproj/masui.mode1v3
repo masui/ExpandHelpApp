@@ -271,12 +271,14 @@
 								<string>29B97317FDCFA39411CA2CEA</string>
 								<string>29B97323FDCFA39411CA2CEA</string>
 								<string>19C28FACFE9D520D11CA2CBB</string>
+								<string>1C37FBAC04509CD000000102</string>
+								<string>CEBC528513227A6600984CBB</string>
 								<string>1C37FABC05509CD000000102</string>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>17</integer>
+									<integer>19</integer>
 									<integer>14</integer>
 									<integer>0</integer>
 								</array>
@@ -301,7 +303,7 @@
 							<real>186</real>
 						</array>
 						<key>RubberWindowFrame</key>
-						<string>50 119 1003 718 0 0 1440 878 </string>
+						<string>41 131 1003 718 0 0 1440 878 </string>
 					</dict>
 					<key>Module</key>
 					<string>PBXSmartGroupTreeModule</string>
@@ -317,7 +319,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>ExpandHelp.rb</string>
+								<string>Info.plist</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -325,16 +327,15 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>ExpandHelp.rb</string>
+										<string>Info.plist</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>CEBC527A1322775C00984CBB</string>
+										<string>CEBC528713227A6600984CBB</string>
 										<key>history</key>
 										<array>
 											<string>CE8B3F9613194935001FF15A</string>
 											<string>CE8B3F9713194935001FF15A</string>
-											<string>CE8B3FC413194CA1001FF15A</string>
 											<string>CE8B40151319DB0C001FF15A</string>
 											<string>CE9DC05D1321C75500F96ADC</string>
 											<string>CE9DC05E1321C75500F96ADC</string>
@@ -345,7 +346,8 @@
 											<string>CE9DC1C01322507100F96ADC</string>
 											<string>CE9DC1C11322507100F96ADC</string>
 											<string>CE9DC1C21322507100F96ADC</string>
-											<string>CE9DC22E13225CA500F96ADC</string>
+											<string>CEBC528613227A6600984CBB</string>
+											<string>CE8B3FC413194CA1001FF15A</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -359,7 +361,7 @@
 								<key>Frame</key>
 								<string>{{0, 0}, {795, 461}}</string>
 								<key>RubberWindowFrame</key>
-								<string>50 119 1003 718 0 0 1440 878 </string>
+								<string>41 131 1003 718 0 0 1440 878 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
@@ -379,7 +381,7 @@
 								<key>Frame</key>
 								<string>{{0, 466}, {795, 211}}</string>
 								<key>RubberWindowFrame</key>
-								<string>50 119 1003 718 0 0 1440 878 </string>
+								<string>41 131 1003 718 0 0 1440 878 </string>
 							</dict>
 							<key>Module</key>
 							<string>XCDetailModule</string>
@@ -543,7 +545,6 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>CEBC527B1322775C00984CBB</string>
 		<string>CEBC51A713225DA400984CBB</string>
 		<string>CEBC51A813225DA400984CBB</string>
 		<string>1CD10A99069EF8BA00B06720</string>
@@ -552,7 +553,7 @@
 		<string>/Users/masui/ExpandHelpApp/ExpandHelpApp.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
-	<string>50 119 1003 718 0 0 1440 878 </string>
+	<string>41 131 1003 718 0 0 1440 878 </string>
 	<key>WindowToolsV3</key>
 	<array>
 		<dict>

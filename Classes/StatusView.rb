@@ -11,24 +11,22 @@ class StatusView < NSView
   def initWithFrame(rect)
     # http://d.hatena.ne.jp/swallow_life/20090614
     if super then # [super initWithFrame(rect)] のかわりらしい
-      @visible = true
+      @visible = false
       self
     end
   end
 
   def mouseDown(event)
-    puts "mouseDown"
     if @visible then
-      p app.statusItem
-      app.statusItem.setHighlightMode(false)
       app.hideQueryView
       app.hideOutputView
       app.hideTableView
+      app.highlight(false)
     else
-      app.statusItem.setHighlightMode(true)
       app.showQueryView
       app.showOutputView
       app.showTableView
+      app.highlight(true)
     end
     @visible = !@visible
   end

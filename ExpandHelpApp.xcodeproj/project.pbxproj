@@ -60,6 +60,8 @@
 		CE9DC0BC1321D39500F96ADC /* StatusView.rb in Resources */ = {isa = PBXBuildFile; fileRef = CE9DC0BB1321D39500F96ADC /* StatusView.rb */; };
 		CE9DC0F7132231C000F96ADC /* mountains.png in Resources */ = {isa = PBXBuildFile; fileRef = CE9DC0F6132231C000F96ADC /* mountains.png */; };
 		CE9DC1AD13224E6500F96ADC /* QueryWindow.rb in Resources */ = {isa = PBXBuildFile; fileRef = CE9DC1AC13224E6500F96ADC /* QueryWindow.rb */; };
+		CEBC5338132297DD00984CBB /* help1.png in Resources */ = {isa = PBXBuildFile; fileRef = CEBC5337132297DD00984CBB /* help1.png */; };
+		CEBC533A132297E400984CBB /* help2.png in Resources */ = {isa = PBXBuildFile; fileRef = CEBC5339132297E400984CBB /* help2.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -99,6 +101,8 @@
 		CE9DC0BB1321D39500F96ADC /* StatusView.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; name = StatusView.rb; path = Classes/StatusView.rb; sourceTree = "<group>"; };
 		CE9DC0F6132231C000F96ADC /* mountains.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = mountains.png; path = ../Desktop/mountains.png; sourceTree = SOURCE_ROOT; };
 		CE9DC1AC13224E6500F96ADC /* QueryWindow.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; name = QueryWindow.rb; path = Classes/QueryWindow.rb; sourceTree = "<group>"; };
+		CEBC5337132297DD00984CBB /* help1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = help1.png; sourceTree = "<group>"; };
+		CEBC5339132297E400984CBB /* help2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = help2.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -190,6 +194,8 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				CEBC5337132297DD00984CBB /* help1.png */,
+				CEBC5339132297E400984CBB /* help2.png */,
 				CE9DC0F6132231C000F96ADC /* mountains.png */,
 				CE9DC0781321CA3C00F96ADC /* app.tiff */,
 				2BFA9DA510CDF852007972A1 /* MainMenu.xib */,
@@ -277,6 +283,8 @@
 				CE9DC0BC1321D39500F96ADC /* StatusView.rb in Resources */,
 				CE9DC0F7132231C000F96ADC /* mountains.png in Resources */,
 				CE9DC1AD13224E6500F96ADC /* QueryWindow.rb in Resources */,
+				CEBC5338132297DD00984CBB /* help1.png in Resources */,
+				CEBC533A132297E400984CBB /* help2.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

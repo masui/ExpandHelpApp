@@ -19,8 +19,8 @@ class ExpandHelp
 #  attr_accessor :command         # 実行するUnixコマンド
   attr_accessor :commandoutput   # Unixコマンドの実行結果
   attr_accessor :cwd             # 現在のディレクトリ
-  attr_accessor :window          # アプリのウィンドウ
   attr_accessor :statusview      # ステータスバー上に表示するアイコンのビュー
+  attr_accessor :statusimage     # ステータスバー上に表示するアイコンのビュー
 
   attr_accessor :queryview       # ヘルプキーワード入力ビュー
   attr_accessor :querywindow     # ヘルプキーワード入力ウィンドウ
@@ -43,6 +43,10 @@ class ExpandHelp
   def awakeFromNib
     chdir(ENV['HOME'])
 
+    bundle = NSBundle.mainBundle
+    @iconpath1 = bundle.pathForResource("help1", ofType:"png", inDirectory:"")
+    @iconpath2 = bundle.pathForResource("help2", ofType:"png", inDirectory:"")
+
     # ステータスバー
     systemStatusBar = NSStatusBar.systemStatusBar
     @statusItem = systemStatusBar.statusItemWithLength(NSVariableStatusItemLength)
@@ -55,8 +59,12 @@ class ExpandHelp
     # p @statusview
     # @statusItem.setTitle("abc")
     @statusItem.setView(@statusview)
+
+    @statusItem.setHighlightMode(true)
     statusViewPosy = @statusview.window.frame.origin.y
     statusViewPosx = @statusview.window.frame.origin.x
+#statusViewPosy = 800
+#statusViewPosx = 800
 
     #
     # キーワード入力ウィンドウを作成
@@ -90,6 +98,8 @@ class ExpandHelp
     y = statusViewPosy - @querywindow.frame.size.height
     x = statusViewPosx
     @querywindow.setFrameOrigin(NSPoint.new(x,y))
+
+    hideQueryView
 
     #
     # 検索結果表示ウィンドウを作成
@@ -227,7 +237,7 @@ class ExpandHelp
   def showQueryView
     @querywindow.contentView.addSubview(@queryview)
     @querywindow.setHasShadow(true)
-    @querywindow.orderFront(self)
+    @querywindow.orderFrontRegardless
   end
 
   def hideQueryView
@@ -239,7 +249,8 @@ class ExpandHelp
     if @tableShouldBeShown then
       @tablewindow.contentView.addSubview(@tableview)
       @tablewindow.setHasShadow(true)
-      @tablewindow.orderFront(self)
+#      @tablewindow.orderFront(self)
+      @tablewindow.orderFrontRegardless
     end
   end
 
@@ -252,12 +263,20 @@ class ExpandHelp
     if @outputShouldBeShown then
       @outputwindow.contentView.addSubview(@outputview)
       @outputwindow.setHasShadow(true)
-      @outputwindow.orderFront(self)
+#      @outputwindow.orderFront(self)
+      @outputwindow.orderFrontRegardless
     end
   end
 
   def hideOutputView
     @outputview.removeFromSuperview
     @outputwindow.setHasShadow(false)
+  end
+
+  def highlight(state)
+    image = NSImage.new
+    path = (state ? @iconpath2 : @iconpath1)
+    image.initByReferencingFile(path)
+    @statusimage.setImage(image)
   end
 end

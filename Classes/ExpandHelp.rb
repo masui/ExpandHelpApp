@@ -180,6 +180,7 @@ class ExpandHelp
         @table.reloadData
         @tableShouldBeShown = true
         showTableView
+        showQueryView
         @outputShouldBeShown = false
         hideOutputView
       end
@@ -218,6 +219,7 @@ class ExpandHelp
       @commandoutput.selectAll(sender)
       @commandoutput.cut(sender)
       @commandoutput.insertText(s.to_s)
+      @commandoutput.scrollRangeToVisible(NSMakeRange(0,0)) # NSTextのメソッド。表示位置指定。
       @outputShouldBeShown = true
       showOutputView
     end
@@ -230,6 +232,7 @@ class ExpandHelp
   def textDidChange(notification)
     @tableShouldBeShown = false
     hideTableView
+    hideOutputView
     @shouldgenerate = true
     generate(nil) unless @generating
   end

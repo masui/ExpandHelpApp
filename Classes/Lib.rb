@@ -2,7 +2,7 @@
 # ExpandHelpApp
 #
 # Created by Toshiyuki Masui on 11/02/27.
-# Copyright 2011 __MyCompanyName__. All rights reserved.
+# Copyright 2011 Pitecan Systems. All rights reserved.
 
 def alarm
   alarmfile = NSBundle.mainBundle.pathForResource("alarm", ofType:"mp3")

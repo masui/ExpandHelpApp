@@ -116,7 +116,7 @@ class Generator
     @commands << command
   end
 
-  def generate(pat)
+  def generate(pat, app)
     res = []
 	
     patterns = pat.split
@@ -140,6 +140,7 @@ class Generator
     #
     #
     (0..1000).each { |length|
+      break if app.inputPending
       list = lists[length]
       newlist = {}
       list.keys.each { |entry|
@@ -162,6 +163,7 @@ class Generator
         end
       }
       newlist.each { |key,value|
+        break if app.inputPending
         if value then
           ruleno = value
           (id, s, *substrings) = key.split(/\t/)
@@ -189,6 +191,7 @@ class Generator
       }
       lists << newlist
     }
+    app.inputPending = false
     res
   end
 end

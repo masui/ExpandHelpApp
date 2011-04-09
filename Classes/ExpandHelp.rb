@@ -9,6 +9,8 @@ require 'Generator'
 require 'HelpData'
 require 'Lib'
 
+require 'thread'
+	
 #
 # ExpandHelpAppのメインクラス
 # MacRuby以外でも動くようにしたいものだが...
@@ -32,11 +34,14 @@ class ExpandHelp
   attr_accessor :outputview       # 出力結果表示ビュー
 
   attr_accessor :statusItem
+
+  attr :inputPending, true
 	
   def initialize
     @helpdata = HelpData.new
     @generator = Generator.new
     @list = []
+    @lock = Mutex.new
   end
 
   # IBデータを読み込んだ後で呼ばれる
@@ -162,12 +167,24 @@ class ExpandHelp
     @helpdata.chdir(dir)
     @cwd.setStringValue(dir)
   end
-	
+
+  def test_and_set(val)
+    res = nil
+    while res == nil do
+      @lock.synchronize {
+        res = @inputPending
+        @inputPending = val
+      }
+    end
+    res
+  end
+
   def generate(sender)
-    t = Thread.new do
+    @thread = Thread.new do
       @generating = true
-      while @shouldgenerate do
-        @shouldgenerate = false
+#      while test_and_set(false) do
+      while @inputPending do
+        @inputPending = false
         @generator = Generator.new
         @helpdata.helpdata.each { |data|
           #     if !data[2] || data[2] =~ @input.stringValue.to_s then 
@@ -175,10 +192,26 @@ class ExpandHelp
             @generator.add data[0], data[1]
           end
         }
-        #   @list = @generator.generate(@input.stringValue)
-        @list = @generator.generate(@input.string)
+        #   @list = @generator.generate(@input.stringValue) # textfieldの場合
+        @list = @generator.generate(@input.string, self) # textiewの場合
         @table.reloadData
         @tableShouldBeShown = true
+
+        height = @list.length * 20
+        height = 400 if height > 400
+        rect =  @tableview.frame
+        rect.size.height = height
+        @tableview.setFrame(rect)
+        @tablewindow.initWithContentRect(rect,
+                                         styleMask:0,
+                                         backing:NSBackingStoreBuffered,
+                                         defer:false)
+        posy = @querywindow.frame.origin.y
+        posx = @querywindow.frame.origin.x
+        y = posy - @tablewindow.frame.size.height
+        x = posx
+        @tablewindow.setFrameOrigin(NSPoint.new(x,y))
+
         showTableView
         showQueryView
         @outputShouldBeShown = false
@@ -215,7 +248,7 @@ class ExpandHelp
 
   def execute(sender)
     s = eval @commandString
-    if s.gsub(/\s/,'') != '' then
+    if s.to_s.gsub(/\s/,'') != '' then
       @commandoutput.selectAll(sender)
       @commandoutput.cut(sender)
       @commandoutput.insertText(s.to_s)
@@ -228,12 +261,16 @@ class ExpandHelp
     hideTableView
   end
 
-  # NSTextViewが編集されると勝手に呼ばれる
+  #
+  # NSTextViewが編集されると呼ばれる
+  #
   def textDidChange(notification)
     @tableShouldBeShown = false
+
+    @inputPending = true
+
     hideTableView
     hideOutputView
-    @shouldgenerate = true
     generate(nil) unless @generating
   end
 

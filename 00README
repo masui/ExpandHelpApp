@@ -1,0 +1,3 @@
+info.plistのLSUIElementという要素を1にするとデーモンのように動く
+(Dockに表示されなくなる)
+http://xcatsan.blogspot.com/2008/03/nsbgonly-nsuielement-lsuielement.html

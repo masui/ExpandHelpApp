@@ -7,7 +7,7 @@
 
 class QueryWindow < NSWindow
   #
-  # NSWindowのサブクラスでこれを実装しないとタイトルなしの
+  # NSWindowのサブクラスでこのメソッドを実装しないとタイトルなしの
   # ウィンドウはキー入力を受け取れないらしい!
   # http://stackoverflow.com/questions/4946342/why-nswindow-without-stylemasknstitledwindowmask-can-not-be-keywindow
   # http://developer.apple.com/library/mac/#documentation/Cocoa/Reference/ApplicationKit/Classes/NSWindow_Class/Reference/Reference.html#//apple_ref/occ/instm/NSWindow/canBecomeKeyWindow

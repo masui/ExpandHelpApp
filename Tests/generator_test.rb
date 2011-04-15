@@ -19,6 +19,16 @@ class GeneratorTest < Test::Unit::TestCase
     assert res.member?(['時計を10時にセットする','set time 10:00'])
     assert !res.member?(['時計を8時にセットする','set time 8:00'])
   end
+
+  def test_substring
+    g = Generator.new
+    g.add '(a)bcd(e(fg)h)i(jk)', '#{$1} #{$2} #{$3} #{$4}'
+    res = g.generate('b')
+    assert res.member?(['abcdefghijk', 'a efgh fg jk'])
+    assert !res.member?(['abcdefghijk', 'a fgh fg jk'])
+  end
 end
+
+
 
 

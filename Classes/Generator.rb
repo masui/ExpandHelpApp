@@ -30,7 +30,7 @@ class Generator
   end
 
   #
-  # patから状態遷移機械を作成し、
+  # patを解析して状態遷移機械を作成し、
   #
   def generate(pat, app = nil)
     res = []
@@ -42,8 +42,10 @@ class Generator
 	
     output = {}
     #
-    # 長さがnの候補をlists[n]に入れる
-    # 候補の文字列は "123<tab>abcというファイル" のような形式
+    # n個のノードを経由して生成される状態の集合をlists[n]に入れる
+    # 状態文字列はノードID, 生成文字列, マッチ文字列をタブで区切って並べる。
+    # e.g. statestr = "123 時刻を7時に 時刻 7"
+    # 受理状態のときは list[statestr] にルール番号を入れる。
     #
     lists = []
     #
@@ -64,34 +66,29 @@ class Generator
         s = "" if s.nil?
         substrings = [] if substrings.nil?
 
-        srcnode = Node.node(id.to_i)
+        srcnode = Node.node(id)
         if list.keys.length * srcnode.trans.length < 10000 then
           srcnode.trans.each { |trans|
-            sss = substrings.dup
+            ss = substrings.dup
             destnode = trans.dest
             destid = destnode.id
             srcnode.pars.each { |i|
-              sss[i-1] = sss[i-1].to_s + trans.pat
+              ss[i-1] = ss[i-1].to_s + trans.pat
             }
-            ss = sss.join("\t")
-            newlist["#{destid}\t#{s+trans.pat}\t#{ss}"] = destnode.accept
+            statestr = [destid, s+trans.pat, ss].join("\t")
+            newlist[statestr] = destnode.accept
           }
         end
       }
-      newlist.each { |key,value|
+      newlist.each { |statestr,ruleno|
         break if app && app.inputPending
-        if value then
-          ruleno = value
-          (id, s, *substrings) = key.split(/\t/)
+        if ruleno then
+          (id, s, *substrings) = statestr.split(/\t/)
           if !output[s] then
-            # substringsの配列を$1, $2...に入れる工夫
-            b = []
-            substrings.each { |string|
-              b << (string =~ /\t(.*)$/ ? $1 : string)
-            }
-            patstr = Array.new(b.length,"(.*)").join("\t")
-            /#{patstr}/ =~ b.join("\t")
             matched = true
+            #
+            # 入力文字列とマッチング (ここが遅いはず)
+            #
             patterns.each { |pat|
               if !s.downcase.index(pat.downcase) then
                 matched = false
@@ -99,6 +96,20 @@ class Generator
               end
             }
             if matched then
+              # substringsの配列を$1, $2...に入れる
+#              b = []
+#              substrings.each { |string|
+#                b << (string =~ /\t(.*)$/ ? $1 : string)
+#              }
+#              patstr = Array.new(b.length,"(.*)").join("\t")
+#              /#{patstr}/ =~ b.join("\t")
+
+              if substrings.length > 0 then
+                patstr = "(.*)\t" * (substrings.length-1) + "(.*)"
+                /#{patstr}/ =~ substrings.join("\t")
+              end
+
+              # 'set date #{$2}' のような記述の$変数にsubstringの値を代入
               res << [s, eval('%('+@commands[ruleno]+')')]
             end
           end

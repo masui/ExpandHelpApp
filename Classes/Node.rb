@@ -42,7 +42,7 @@ class Node
   end
 
   def Node.node(id) # ノードidからノードを取得
-    @@nodes[id]
+    @@nodes[id.to_i]
   end
 
   def Node.nodes

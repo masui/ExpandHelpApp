@@ -16,6 +16,20 @@
 require 'Scanner'
 require 'Node'
 
+class GenNode
+  def initialize(id, s="", substrings=[], accept=false)
+    @id = id
+    @s = s
+    @substrings = substrings
+    @accept = accept
+  end
+
+  attr :id, true
+  attr :s, true
+  attr :substrings, true
+  attr :accept, true
+end
+
 class Generator
   def initialize(s = nil)
     @s = (s ? [s] : [])
@@ -59,7 +73,8 @@ class Generator
     #
     list = []
     #list["#{startnode.id}\t"] = false
-    list[0] = [startnode.id, '', [], false]
+    # list[0] = [startnode.id, '', [], false]
+    list[0] = GenNode.new(startnode.id)
     lists[0] = list
     #
     #
@@ -75,21 +90,21 @@ class Generator
         # entry[2] = substrings
         # entry[3] = accept
         # (id, s, *substrings) = entry.split(/\t/) # これが遅い??
-        id = entry[0]
-        s = (entry[1].split(/\t/))[0].to_s
+        #id = entry[0]
+        #s = (entry[1].split(/\t/))[0].to_s
         # s = entry[1]
-        substrings = entry[2]
+        #substrings = entry[2]
 
-        srcnode = Node.node(id)
+        srcnode = Node.node(entry.id)
         if list.length * srcnode.trans.length < 10000 then
           srcnode.trans.each { |trans|
             destnode = trans.dest
             destid = destnode.id
-            ss = substrings.dup
+            ss = entry.substrings.dup
             srcnode.pars.each { |i|
-              ss[i-1] = ss[i-1].to_s + trans.pat
+              ss[i-1] = ss[i-1].to_s + trans.arg
             }
-            newlist << [destid, s+trans.pat, ss, destnode.accept]
+            newlist << GenNode.new(destid, entry.s+trans.str, ss, destnode.accept)
           }
         end
       }
@@ -97,20 +112,20 @@ break if newlist.length == 0
       newlist.each { |entry| # |statestr,ruleno|
         # break if app && app.inputPending
 # if false then
-        ruleno = entry[3]
+        ruleno = entry.accept
         if ruleno then
           # (id, s, *substrings) = statestr.split(/\t/)
-          id = entry[0]
-          s = (entry[1].split(/\t/))[0].to_s
+          #id = entry[0]
+          #s = (entry[1].split(/\t/))[0].to_s
           # s = entry[1]
-          substrings = entry[2]
-          if !listed[s] then
+          # substrings = entry[2]
+          if !listed[entry.s] then
             matched = true
             #
             # 入力文字列とマッチング (ここが遅いはず)
             #
             patterns.each { |pat|
-              if !s.downcase.index(pat) then
+              if !entry.s.downcase.index(pat) then
                 matched = false
                 break
               end
@@ -119,7 +134,7 @@ break if newlist.length == 0
 #            if regpat =~ s then
               # substringsの配列を$1, $2...に入れる工夫
               b = []
-              substrings.each { |string|
+              entry.substrings.each { |string|
                 b << (string =~ /\t(.*)$/ ? $1 : string)
               }
               patstr = Array.new(b.length,"(.*)").join("\t")
@@ -131,11 +146,10 @@ break if newlist.length == 0
 #              end
 
               # 'set date #{$2}' のような記述の$変数にsubstringの値を代入
-              res << [s, eval('%('+@commands[ruleno]+')')]
-#              puts s
+              res << [entry.s, eval('%('+@commands[ruleno]+')')]
             end
           end
-          listed[s] = true
+          listed[entry.s] = true
         end
 # end
       }

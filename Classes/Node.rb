@@ -16,6 +16,14 @@ class Trans
   end
 
   attr_reader :pat, :dest
+
+  def str
+    @pat.split(/\t/)[0].to_s
+  end
+
+  def arg
+    @pat.split(/\t/)[1].to_s
+  end
 end
 
 class Node

@@ -183,9 +183,9 @@ class ExpandHelp
     @thread = Thread.new do
       @generating = true
 #      while test_and_set(false) do
+if false then
       while @inputPending do
         @inputPending = false
-
         @list = []
 
         @helpdata.helpdata.each { |data|
@@ -226,6 +226,42 @@ class ExpandHelp
           end
         }
       end
+else
+      while @inputPending do
+        @inputPending = false
+        @generator = Generator.new
+        @helpdata.helpdata.each { |data|
+          #     if !data[2] || data[2] =~ @input.stringValue.to_s then 
+          if !data[2] || data[2] =~ @input.string then 
+            @generator.add data[0], data[1]
+          end
+        }
+        #   @list = @generator.generate(@input.stringValue) # textfieldの場合
+        @list = @generator.generate(@input.string, self) # textiewの場合
+        @table.reloadData
+        @tableShouldBeShown = true
+
+        height = @list.length * 20
+        height = 400 if height > 400
+        rect =  @tableview.frame
+        rect.size.height = height
+        @tableview.setFrame(rect)
+        @tablewindow.initWithContentRect(rect,
+                                         styleMask:0,
+                                         backing:NSBackingStoreBuffered,
+                                         defer:false)
+        posy = @querywindow.frame.origin.y
+        posx = @querywindow.frame.origin.x
+        y = posy - @tablewindow.frame.size.height
+        x = posx
+        @tablewindow.setFrameOrigin(NSPoint.new(x,y))
+
+        showTableView
+        showQueryView
+        @outputShouldBeShown = false
+        hideOutputView
+      end
+end
       @generating = false
     end
   end

@@ -30,29 +30,36 @@ class Generator
   end
 
   #
-  # patを解析して状態遷移機械を作成し、
+  # ルールを解析して状態遷移機械を作成し、patにマッチするもののリストを返す
   #
   def generate(pat, app = nil)
     res = []
+#    puts "GENERATOR(#{pat})"
+#puts "pat = #{pat}"
+
 	
-    patterns = pat.split
+    patterns = pat.split.map { |p| p.downcase }
+#    regpat = /#{patterns.join(".*")}/i
+#    puts regpat
 
     scanner = Scanner.new(@s.join('|'))
     (startnode, endnode) = regexp(scanner,true) # top level
 	
-    output = {}
+    listed = {}
     #
     # n個のノードを経由して生成される状態の集合をlists[n]に入れる
     # 状態文字列はノードID, 生成文字列, マッチ文字列をタブで区切って並べる。
     # e.g. statestr = "123 時刻を7時に 時刻 7"
     # 受理状態のときは list[statestr] にルール番号を入れる。
+    # ... しかしこれが遅いのかも???
     #
     lists = []
     #
     # 初期状態
     #
-    list = {}
-    list["#{startnode.id}\t"] = false
+    list = []
+    #list["#{startnode.id}\t"] = false
+    list[0] = [startnode.id, '', [], false]
     lists[0] = list
     #
     #
@@ -60,61 +67,77 @@ class Generator
     (0..1000).each { |length|
       break if app && app.inputPending
       list = lists[length]
-      newlist = {}
-      list.keys.each { |entry|
-        (id, s, *substrings) = entry.split(/\t/)
-        s = "" if s.nil?
-        substrings = [] if substrings.nil?
+      newlist = []
+# puts "#{length} - #{list.length}"
+      list.each { |entry|
+        # entry[0] = id
+        # entry[1] = s
+        # entry[2] = substrings
+        # entry[3] = accept
+        # (id, s, *substrings) = entry.split(/\t/) # これが遅い??
+        id = entry[0]
+        s = (entry[1].split(/\t/))[0].to_s
+        # s = entry[1]
+        substrings = entry[2]
 
         srcnode = Node.node(id)
-        if list.keys.length * srcnode.trans.length < 10000 then
+        if list.length * srcnode.trans.length < 10000 then
           srcnode.trans.each { |trans|
-            ss = substrings.dup
             destnode = trans.dest
             destid = destnode.id
+            ss = substrings.dup
             srcnode.pars.each { |i|
               ss[i-1] = ss[i-1].to_s + trans.pat
             }
-            statestr = [destid, s+trans.pat, ss].join("\t")
-            newlist[statestr] = destnode.accept
+            newlist << [destid, s+trans.pat, ss, destnode.accept]
           }
         end
       }
-      newlist.each { |statestr,ruleno|
-        break if app && app.inputPending
+break if newlist.length == 0
+      newlist.each { |entry| # |statestr,ruleno|
+        # break if app && app.inputPending
+# if false then
+        ruleno = entry[3]
         if ruleno then
-          (id, s, *substrings) = statestr.split(/\t/)
-          if !output[s] then
+          # (id, s, *substrings) = statestr.split(/\t/)
+          id = entry[0]
+          s = (entry[1].split(/\t/))[0].to_s
+          # s = entry[1]
+          substrings = entry[2]
+          if !listed[s] then
             matched = true
             #
             # 入力文字列とマッチング (ここが遅いはず)
             #
             patterns.each { |pat|
-              if !s.downcase.index(pat.downcase) then
+              if !s.downcase.index(pat) then
                 matched = false
                 break
               end
             }
             if matched then
-              # substringsの配列を$1, $2...に入れる
-#              b = []
-#              substrings.each { |string|
-#                b << (string =~ /\t(.*)$/ ? $1 : string)
-#              }
-#              patstr = Array.new(b.length,"(.*)").join("\t")
-#              /#{patstr}/ =~ b.join("\t")
+#            if regpat =~ s then
+              # substringsの配列を$1, $2...に入れる工夫
+              b = []
+              substrings.each { |string|
+                b << (string =~ /\t(.*)$/ ? $1 : string)
+              }
+              patstr = Array.new(b.length,"(.*)").join("\t")
+              /#{patstr}/ =~ b.join("\t")
 
-              if substrings.length > 0 then
-                patstr = "(.*)\t" * (substrings.length-1) + "(.*)"
-                /#{patstr}/ =~ substrings.join("\t")
-              end
+#              if substrings.length > 0 then
+#                patstr = "(.*)\t" * (substrings.length-1) + "(.*)"
+#                /#{patstr}/ =~ substrings.join("\t")
+#              end
 
               # 'set date #{$2}' のような記述の$変数にsubstringの値を代入
               res << [s, eval('%('+@commands[ruleno]+')')]
+#              puts s
             end
           end
-          output[s] = true
+          listed[s] = true
         end
+# end
       }
       lists << newlist
     }
@@ -127,10 +150,12 @@ class Generator
   #
 
   private
-
-  #
-  #  n1  'abc'  n2
-  #  □ ------> □
+  #            n1     n2
+  #        +-->□.....□--+
+  # start /                \  end
+  #     □ --->□.....□---> □
+  #       \                /
+  #        +-->□.....□--+
   #
   def regexp(s,toplevel=false) # regcat { '|' regcat }
     startnode = Node.new

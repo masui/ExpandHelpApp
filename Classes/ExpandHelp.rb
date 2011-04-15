@@ -185,37 +185,46 @@ class ExpandHelp
 #      while test_and_set(false) do
       while @inputPending do
         @inputPending = false
-        @generator = Generator.new
+
+        @list = []
+
         @helpdata.helpdata.each { |data|
           #     if !data[2] || data[2] =~ @input.stringValue.to_s then 
           if !data[2] || data[2] =~ @input.string then 
+#puts data[0]
+            @generator = Generator.new
             @generator.add data[0], data[1]
+            newlist = @generator.generate(@input.string, self) # textiewの場合
+            if newlist.length > 0 then
+
+              hideTableView
+
+              @list += newlist
+              @table.reloadData
+              @tableShouldBeShown = true
+
+              height = @list.length * 20
+              height = 400 if height > 400
+              rect =  @tableview.frame
+              rect.size.height = height
+              @tableview.setFrame(rect)
+              @tablewindow.initWithContentRect(rect,
+                                               styleMask:0,
+                                               backing:NSBackingStoreBuffered,
+                                               defer:false)
+              posy = @querywindow.frame.origin.y
+              posx = @querywindow.frame.origin.x
+              y = posy - @tablewindow.frame.size.height
+              x = posx
+              @tablewindow.setFrameOrigin(NSPoint.new(x,y))
+
+              showTableView
+#              showQueryView
+              @outputShouldBeShown = false
+              hideOutputView
+            end
           end
         }
-        #   @list = @generator.generate(@input.stringValue) # textfieldの場合
-        @list = @generator.generate(@input.string, self) # textiewの場合
-        @table.reloadData
-        @tableShouldBeShown = true
-
-        height = @list.length * 20
-        height = 400 if height > 400
-        rect =  @tableview.frame
-        rect.size.height = height
-        @tableview.setFrame(rect)
-        @tablewindow.initWithContentRect(rect,
-                                         styleMask:0,
-                                         backing:NSBackingStoreBuffered,
-                                         defer:false)
-        posy = @querywindow.frame.origin.y
-        posx = @querywindow.frame.origin.x
-        y = posy - @tablewindow.frame.size.height
-        x = posx
-        @tablewindow.setFrameOrigin(NSPoint.new(x,y))
-
-        showTableView
-        showQueryView
-        @outputShouldBeShown = false
-        hideOutputView
       end
       @generating = false
     end

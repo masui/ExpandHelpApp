@@ -3,7 +3,7 @@
 # ExpandHelpApp
 #
 # Created by Toshiyuki Masui on 11/02/26.
-# Copyright 2011 __MyCompanyName__. All rights reserved.
+# Copyright 2011 Pitecan Systems. All rights reserved.
 
 #
 #          ( (  )  )  ( (    ) (  (  )  ) (   )  )  | (  (  )  )
@@ -17,7 +17,111 @@ require 'Scanner'
 require 'Node'
 
 class Generator
-  def regexp(s,toplevel=false)
+  def initialize(s = nil)
+    @s = (s ? [s] : [])
+    @matchedlist = []
+    @par = 0
+    @commands = []
+  end
+
+  def add(pat,command)
+    @s << pat
+    @commands << command
+  end
+
+  #
+  # patから状態遷移機械を作成し、
+  #
+  def generate(pat, app = nil)
+    res = []
+	
+    patterns = pat.split
+
+    scanner = Scanner.new(@s.join('|'))
+    (startnode, endnode) = regexp(scanner,true) # top level
+	
+    output = {}
+    #
+    # 長さがnの候補をlists[n]に入れる
+    # 候補の文字列は "123<tab>abcというファイル" のような形式
+    #
+    lists = []
+    #
+    # 初期状態
+    #
+    list = {}
+    list["#{startnode.id}\t"] = false
+    lists[0] = list
+    #
+    #
+    #
+    (0..1000).each { |length|
+      break if app && app.inputPending
+      list = lists[length]
+      newlist = {}
+      list.keys.each { |entry|
+        (id, s, *substrings) = entry.split(/\t/)
+        s = "" if s.nil?
+        substrings = [] if substrings.nil?
+
+        srcnode = Node.node(id.to_i)
+        if list.keys.length * srcnode.trans.length < 10000 then
+          srcnode.trans.each { |trans|
+            sss = substrings.dup
+            destnode = trans.dest
+            destid = destnode.id
+            srcnode.pars.each { |i|
+              sss[i-1] = sss[i-1].to_s + trans.pat
+            }
+            ss = sss.join("\t")
+            newlist["#{destid}\t#{s+trans.pat}\t#{ss}"] = destnode.accept
+          }
+        end
+      }
+      newlist.each { |key,value|
+        break if app && app.inputPending
+        if value then
+          ruleno = value
+          (id, s, *substrings) = key.split(/\t/)
+          if !output[s] then
+            # substringsの配列を$1, $2...に入れる工夫
+            b = []
+            substrings.each { |string|
+              b << (string =~ /\t(.*)$/ ? $1 : string)
+            }
+            patstr = Array.new(b.length,"(.*)").join("\t")
+            /#{patstr}/ =~ b.join("\t")
+            matched = true
+            patterns.each { |pat|
+              if !s.downcase.index(pat.downcase) then
+                matched = false
+                break
+              end
+            }
+            if matched then
+              res << [s, eval('%('+@commands[ruleno]+')')]
+            end
+          end
+          output[s] = true
+        end
+      }
+      lists << newlist
+    }
+    app.inputPending = false if app
+    res
+  end
+
+  #
+  # 正規表現をパースして状態遷移機械を作る
+  #
+
+  private
+
+  #
+  #  n1  'abc'  n2
+  #  □ ------> □
+  #
+  def regexp(s,toplevel=false) # regcat { '|' regcat }
     startnode = Node.new
     endnode = Node.new
     if toplevel then
@@ -50,7 +154,7 @@ class Generator
     return [startnode, endnode]
   end
 
-  def regcat(s)
+  def regcat(s) # regfactor { regfactor }
     (startnode, endnode) = regfactor(s)
     while s.gettoken !~ /^[\)\]\|]$/ && s.nexttoken != '' do
       s.ungettoken
@@ -62,7 +166,7 @@ class Generator
     return [startnode, endnode]
   end
 
-  def regfactor(s)
+  def regfactor(s) # regterm [ '?' | '+' | '*' ]
     (startnode, endnode) = regterm(s)
     t = s.gettoken
     if t =~ /^[\?]$/ then
@@ -78,7 +182,7 @@ class Generator
     return [startnode,endnode]
   end
 
-  def regterm(s)
+  def regterm(s) # '(' regexp ')' | token
     t = s.gettoken
     if t == '(' then
       @parno += 1
@@ -103,96 +207,4 @@ class Generator
       return [startnode, endnode]
     end
   end
-
-  def initialize(s = nil)
-    @s = (s ? [s] : [])
-    @matchedlist = []
-    @par = 0
-    @commands = []
-  end
-
-  def add(pat,command)
-    @s << pat
-    @commands << command
-  end
-
-  def generate(pat, app)
-    res = []
-	
-    patterns = pat.split
-
-    scanner = Scanner.new(@s.join('|'))
-    (startnode, endnode) = regexp(scanner,true) # top level
-	
-    output = {}
-    #
-    # 長さがnの候補をlists[n]に入れる
-    # 候補の文字列は "123<tab>abcというファイル" のような形式
-    #
-    lists = []
-    #
-    # 初期状態
-    #
-    list = {}
-    list["#{startnode.id}\t"] = false
-    lists[0] = list
-    #
-    #
-    #
-    (0..1000).each { |length|
-      break if app.inputPending
-      list = lists[length]
-      newlist = {}
-      list.keys.each { |entry|
-        (id, s, *substrings) = entry.split(/\t/)
-        s = "" if s.nil?
-        substrings = [] if substrings.nil?
-
-        srcnode = Node.node(id.to_i)
-        if list.keys.length * srcnode.trans.length < 10000 then
-          srcnode.trans.each { |trans|
-            sss = substrings.dup
-            destnode = trans.dest
-            destid = destnode.id
-            srcnode.pars.each { |i|
-              sss[i-1] = sss[i-1].to_s + trans.pat
-            }
-            ss = sss.join("\t")
-            newlist["#{destid}\t#{s+trans.pat}\t#{ss}"] = destnode.accept
-          }
-        end
-      }
-      newlist.each { |key,value|
-        break if app.inputPending
-        if value then
-          ruleno = value
-          (id, s, *substrings) = key.split(/\t/)
-          if !output[s] then
-            # substringsの配列を$1, $2...に入れる工夫
-            b = []
-            substrings.each { |string|
-              b << (string =~ /\t(.*)$/ ? $1 : string)
-            }
-            patstr = Array.new(b.length,"(.*)").join("\t")
-            /#{patstr}/ =~ b.join("\t")
-            matched = true
-            patterns.each { |pat|
-              if !s.downcase.index(pat.downcase) then
-                matched = false
-                break
-              end
-            }
-            if matched then
-              res << [s, eval('%('+@commands[ruleno]+')')]
-            end
-          end
-          output[s] = true
-        end
-      }
-      lists << newlist
-    }
-    app.inputPending = false
-    res
-  end
 end
-

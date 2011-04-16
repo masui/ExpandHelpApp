@@ -49,12 +49,16 @@ class Generator
   #
   # ルールを解析して状態遷移機械を作成し、patにマッチするもののリストを返す
   #
-  def generate(pat, app = nil)
+  def generate(pat, ambig=0, app = nil)
     res = []
     patterns = pat.split.map { |p| p.downcase }
 
     @asearch = Asearch.new(pat)
     scanner = Scanner.new(@s.join('|'))
+    File.open("/tmp/log","w"){ |f|
+      f.puts @s.join('|')
+    }
+
     (startnode, endnode) = regexp(scanner,true) # top level
     listed = {}
     #
@@ -81,29 +85,19 @@ class Generator
             srcnode.pars.each { |i|
               ss[i-1] = ss[i-1].to_s + trans.arg
             }
-            newstate = @asearch.state(entry.state, trans.str)
+            newstate = @asearch.state(entry.state, trans.str) # 新しい状態を計算してノードに保存する!
             newlist << GenNode.new(trans.dest.id, newstate, entry.s+trans.str, ss, trans.dest.accept)
           }
         end
       }
-break if newlist.length == 0
-if false then
-      newlist.each { |entry| # |statestr,ruleno|
+      break if newlist.length == 0
+      newlist.each { |entry|
         # break if app && app.inputPending
         ruleno = entry.accept
         if ruleno then
           if !listed[entry.s] then
             matched = true
-            #
-            # 入力文字列とマッチング (ここが遅いはず)
-            #
-            patterns.each { |pat|
-              if !entry.s.downcase.index(pat) then
-                matched = false
-                break
-              end
-            }
-            if matched then
+            if (entry.state[ambig] & @asearch.acceptpat) != 0 then # マッチ
               if entry.substrings.length > 0 then
                 patstr = "(.*)\t" * (entry.substrings.length-1) + "(.*)"
                 /#{patstr}/ =~ entry.substrings.join("\t")
@@ -115,26 +109,6 @@ if false then
           listed[entry.s] = true
         end
       }
-else
-      newlist.each { |entry| # |statestr,ruleno|
-        # break if app && app.inputPending
-        ruleno = entry.accept
-        if ruleno then
-          if !listed[entry.s] then
-            matched = true
-            if (entry.state[1] & @asearch.acceptpat) != 0 then
-              if entry.substrings.length > 0 then
-                patstr = "(.*)\t" * (entry.substrings.length-1) + "(.*)"
-                /#{patstr}/ =~ entry.substrings.join("\t")
-              end
-              # 'set date #{$2}' のような記述の$変数にsubstringの値を代入
-              res << [entry.s, eval('%('+@commands[ruleno]+')')]
-            end
-          end
-          listed[entry.s] = true
-        end
-      }
-end
       lists << newlist
     }
     app.inputPending = false if app

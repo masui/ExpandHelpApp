@@ -21,11 +21,10 @@ def bigfiles(size)
 end
 
 def ls
-  Dir.open(".").collect { |file|
-    next if file == '.'
-    next if file == '..'
-    next if File.ftype(file) != 'file'
-    file
+  Dir.open(".").find_all { |file|
+    file != '.' && 
+    file != '..' &&
+    File.ftype(file) == 'file'
   }.join("|")
 end
 

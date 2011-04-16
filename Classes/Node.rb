@@ -22,7 +22,11 @@ class Trans
   end
 
   def arg
-    @pat.split(/\t/)[1].to_s
+    if @pat =~ /^(.*)\t(.*)$/ then
+      return $1
+    else
+      return @pat
+    end
   end
 end
 

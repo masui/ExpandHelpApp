@@ -313,8 +313,8 @@
 	CE9DC0BB1321D39500F96ADC /* StatusView.rb */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {734, 433}}";
-			sepNavSelRange = "{177, 6}";
-			sepNavVisRange = "{0, 615}";
+			sepNavSelRange = "{204, 0}";
+			sepNavVisRange = "{0, 566}";
 		};
 	};
 	CE9DC0F6132231C000F96ADC /* mountains.png */ = {

@@ -22,10 +22,14 @@ class GeneratorTest < Test::Unit::TestCase
 
   def test_substring
     g = Generator.new
-    g.add '(a)bcd(e(fg)h)i(jk)', '#{$1} #{$2} #{$3} #{$4}'
+    g.add '(a)bcd(e(fg)h)i(jk)', '#{$1}/#{$2}/#{$3}/#{$4}'
     res = g.generate('b')
-    assert res.member?(['abcdefghijk', 'a efgh fg jk'])
-    assert !res.member?(['abcdefghijk', 'a fgh fg jk'])
+    assert res.member?(['abcdefghijk', 'a/efgh/fg/jk'])
+    assert !res.member?(['abcdefghijk', 'a/fgh/fg/jk'])
+    g.add '(ab|cd)efg(hij|klm)n', '#{$1}/#{$2}'
+    res = g.generate('ef')
+    assert res.member?(['abefghijn', 'ab/hij'])
+    assert res.member?(['cdefgklmn', 'cd/klm'])
   end
 end
 

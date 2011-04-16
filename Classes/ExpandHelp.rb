@@ -264,6 +264,7 @@ else
 end
       @generating = false
     end
+puts "END"
   end
 
   # NSTableView Tutorial を参考にしている

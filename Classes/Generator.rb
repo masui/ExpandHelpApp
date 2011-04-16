@@ -83,9 +83,9 @@ class Generator
         end
       }
 break if newlist.length == 0
+# if false then
       newlist.each { |entry| # |statestr,ruleno|
         # break if app && app.inputPending
-# if false then
         ruleno = entry.accept
         if ruleno then
           if !listed[entry.s] then
@@ -104,15 +104,14 @@ break if newlist.length == 0
                 patstr = "(.*)\t" * (entry.substrings.length-1) + "(.*)"
                 /#{patstr}/ =~ entry.substrings.join("\t")
               end
-
               # 'set date #{$2}' のような記述の$変数にsubstringの値を代入
               res << [entry.s, eval('%('+@commands[ruleno]+')')]
             end
           end
           listed[entry.s] = true
         end
-# end
       }
+# end
       lists << newlist
     }
     app.inputPending = false if app

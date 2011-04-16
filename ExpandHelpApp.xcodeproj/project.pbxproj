@@ -49,6 +49,7 @@
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+		CE2428F613594A4E00B84E9F /* Asearch.rb in Resources */ = {isa = PBXBuildFile; fileRef = CE2428F513594A4E00B84E9F /* Asearch.rb */; };
 		CE8B3DF41318FE4D001FF15A /* Generator.rb in Resources */ = {isa = PBXBuildFile; fileRef = CE8B3DF31318FE4D001FF15A /* Generator.rb */; };
 		CE8B3E1013190174001FF15A /* Node.rb in Resources */ = {isa = PBXBuildFile; fileRef = CE8B3E0F13190174001FF15A /* Node.rb */; };
 		CE8B3E16131901BE001FF15A /* Scanner.rb in Resources */ = {isa = PBXBuildFile; fileRef = CE8B3E15131901BE001FF15A /* Scanner.rb */; };
@@ -90,6 +91,7 @@
 		4DE3BE130D8651D900ECA448 /* MacRuby.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MacRuby.framework; path = /Library/Frameworks/MacRuby.framework; sourceTree = "<absolute>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* ExpandHelpApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ExpandHelpApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE2428F513594A4E00B84E9F /* Asearch.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; name = Asearch.rb; path = Classes/Asearch.rb; sourceTree = "<group>"; };
 		CE8B3DF31318FE4D001FF15A /* Generator.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; name = Generator.rb; path = Classes/Generator.rb; sourceTree = "<group>"; };
 		CE8B3E0F13190174001FF15A /* Node.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; name = Node.rb; path = Classes/Node.rb; sourceTree = "<group>"; };
 		CE8B3E15131901BE001FF15A /* Scanner.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; name = Scanner.rb; path = Classes/Scanner.rb; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				CE2428F513594A4E00B84E9F /* Asearch.rb */,
 				CE8B3E15131901BE001FF15A /* Scanner.rb */,
 				CE8B3DF31318FE4D001FF15A /* Generator.rb */,
 				CE8B3E0F13190174001FF15A /* Node.rb */,
@@ -285,6 +288,7 @@
 				CE9DC1AD13224E6500F96ADC /* QueryWindow.rb in Resources */,
 				CEBC5338132297DD00984CBB /* help1.png in Resources */,
 				CEBC533A132297E400984CBB /* help2.png in Resources */,
+				CE2428F613594A4E00B84E9F /* Asearch.rb in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

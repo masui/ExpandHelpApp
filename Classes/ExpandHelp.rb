@@ -194,7 +194,7 @@ if false then
 #puts data[0]
             @generator = Generator.new
             @generator.add data[0], data[1]
-            newlist = @generator.generate(@input.string, self) # textiewの場合
+            newlist = @generator.generate(" " + @input.string + " ", self) # textiewの場合
             if newlist.length > 0 then
 
               hideTableView
@@ -237,7 +237,7 @@ else
           end
         }
         #   @list = @generator.generate(@input.stringValue) # textfieldの場合
-        @list = @generator.generate(@input.string, self) # textiewの場合
+        @list = @generator.generate(" " + @input.string + " ", self) # textiewの場合
         @table.reloadData
         @tableShouldBeShown = true
 
@@ -264,7 +264,6 @@ else
 end
       @generating = false
     end
-puts "END"
   end
 
   # NSTableView Tutorial を参考にしている

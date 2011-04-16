@@ -4,6 +4,15 @@
 # Created by Toshiyuki Masui on 11/04/16.
 # Copyright 2011 Pitecan Systems. All rights reserved.
 #
+#   a = Asearch.new('abcde')
+#   a.match('abcde') => true
+#   a.match('abXcde',1) => true
+#
+#   a = Asearch.new('abcde')
+#   initstate = a.state
+#   laststate = a.state(initstate,'abcde')
+#   laststate[0] & a.acceptpat => non-zero value
+#
 
 class Asearch
   INITPAT = 0x800000

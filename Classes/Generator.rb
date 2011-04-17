@@ -57,11 +57,13 @@ class Generator
     scanner = Scanner.new(@s.join('|'))
 
     # HelpDataで指定した状態遷移機械全体を生成
+    # (少し時間がかかる)
     (startnode, endnode) = regexp(scanner,true) # top level
     listed = {}
     #
     # 状態遷移機械からDepth-Firstで文字列を生成する
     # n個のノードを経由して生成される状態の集合をlists[n]に入れる
+    # 生成しながらマッチングも計算する
     #
     lists = []
     #
@@ -89,10 +91,15 @@ class Generator
             newstate = @asearch.state(entry.state, trans.str) # 新しいマッチング状態を計算してノードに保存
             s = entry.s + trans.str
             acceptno = trans.dest.accept
+            newlist << GenNode.new(trans.dest.id, newstate, s, ss, acceptno)
+            #
+            # マッチしてたら出力リストに加える
+            # マッチしているかどうかはstateとacceptpatで判断できる
+            #
             if acceptno then
               if !listed[s] then
-                listed[s] = true
                 if (newstate[ambig] & @asearch.acceptpat) != 0 then # マッチ
+                  listed[s] = true
                   if ss.length > 0 then
                     patstr = "(.*)\t" * (ss.length-1) + "(.*)"
                     /#{patstr}/ =~ ss.join("\t")
@@ -102,7 +109,6 @@ class Generator
                 end
               end
             end
-            newlist << GenNode.new(trans.dest.id, newstate, s, ss, acceptno)
           }
         end
       }
@@ -116,7 +122,6 @@ class Generator
   #
   # 正規表現をパースして状態遷移機械を作る
   #
-
   private
   #            n1     n2
   #        +-->□.....□--+

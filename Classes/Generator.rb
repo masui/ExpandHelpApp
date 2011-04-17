@@ -55,9 +55,6 @@ class Generator
 
     @asearch = Asearch.new(pat)
     scanner = Scanner.new(@s.join('|'))
-    File.open("/tmp/log","w"){ |f|
-      f.puts @s.join('|')
-    }
 
     (startnode, endnode) = regexp(scanner,true) # top level
     listed = {}
@@ -85,16 +82,30 @@ class Generator
             srcnode.pars.each { |i|
               ss[i-1] = ss[i-1].to_s + trans.arg
             }
-            newstate = @asearch.state(entry.state, trans.str) # 新しい状態を計算してノードに保存する!
+            newstate = @asearch.state(entry.state, trans.str) # 新しいマッチング状態を計算してノードに保存する!
+            if ruleno = trans.dest.accept then
+              s = entry.s + trans.str
+              if !listed[s] then
+                if (newstate[ambig] & @asearch.acceptpat) != 0 then # マッチ
+                  if ss.length > 0 then
+                    patstr = "(.*)\t" * (ss.length-1) + "(.*)"
+                    /#{patstr}/ =~ ss.join("\t")
+                  end
+                  # 'set date #{$2}' のような記述の$変数にsubstringの値を代入
+                  res << [s, eval('%('+@commands[ruleno]+')')]
+                end
+              end
+              listed[s] = true
+            end
             newlist << GenNode.new(trans.dest.id, newstate, entry.s+trans.str, ss, trans.dest.accept)
           }
         end
       }
       break if newlist.length == 0
+if false then
       newlist.each { |entry|
-        # break if app && app.inputPending
-        ruleno = entry.accept
-        if ruleno then
+        break if app && app.inputPending
+        if ruleno = entry.accept then
           if !listed[entry.s] then
             matched = true
             if (entry.state[ambig] & @asearch.acceptpat) != 0 then # マッチ
@@ -109,6 +120,7 @@ class Generator
           listed[entry.s] = true
         end
       }
+end
       lists << newlist
     }
     app.inputPending = false if app

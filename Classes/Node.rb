@@ -23,7 +23,7 @@ class Trans
 
   def arg
     if @pat =~ /^(.*)\t(.*)$/ then
-      return $1
+      return $2
     else
       return @pat
     end

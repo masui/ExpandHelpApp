@@ -59,13 +59,14 @@ class Generator
     # HelpDataで指定した状態遷移機械全体を生成
     # (少し時間がかかる)
     (startnode, endnode) = regexp(scanner,true) # top level
-    listed = {}
+
     #
     # 状態遷移機械からDepth-Firstで文字列を生成する
     # n個のノードを経由して生成される状態の集合をlists[n]に入れる
     # 生成しながらマッチングも計算する
     #
     lists = []
+    listed = {}
     #
     # 初期状態
     #
@@ -74,9 +75,7 @@ class Generator
     lists[0] = list
     #
     (0..1000).each { |length|
-      if app && app.inputPending then
-        break
-      end
+      break if app && app.inputPending
       list = lists[length]
       newlist = []
       # puts "#{length} - #{list.length}"
@@ -93,15 +92,17 @@ class Generator
             acceptno = trans.dest.accept
             newlist << GenNode.new(trans.dest.id, newstate, s, ss, acceptno)
             #
+            # この時点で、マッチしているかどうかをstateとacceptpatで判断できる
             # マッチしてたら出力リストに加える
-            # マッチしているかどうかはstateとacceptpatで判断できる
             #
             if acceptno then
               if !listed[s] then
                 if (newstate[ambig] & @asearch.acceptpat) != 0 then # マッチ
                   listed[s] = true
-                  if ss.length > 0 then
-                    patstr = "(.*)\t" * (ss.length-1) + "(.*)"
+                  sslen = ss.length
+                  if sslen > 0 then
+                    # patstr = "(.*)\t" * (sslen-1) + "(.*)"
+                    patstr = (["(.*)"] * sslen).join("\t")
                     /#{patstr}/ =~ ss.join("\t")
                   end
                   # 'set date #{$2}' のような記述の$変数にsubstringの値を代入

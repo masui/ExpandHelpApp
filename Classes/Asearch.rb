@@ -9,7 +9,7 @@
 #   a.match('abXcde',1) => true
 #
 #   a = Asearch.new('abcde')
-#   initstate = a.state
+#   initstate = a.initstate
 #   laststate = a.state(initstate,'abcde')
 #   laststate[0] & a.acceptpat => non-zero value
 #
@@ -61,9 +61,9 @@ class Asearch
   #
   # 状態stateからテキストstrを認識したときの状態変化
   #
-  def state(state = [INITPAT, 0, 0], str = '')
+  def state(state=nil,str='')
     if state.nil? then
-      state = [INITPAT, 0, 0]
+      state = initstate
     end
     i0 = state[0]
     i1 = state[1]
@@ -76,13 +76,16 @@ class Asearch
       i0 = (i0 & @epsilon) | ((i0 & mask) >> 1)
       i1 |= (i0 >> 1)
       i2 |= (i1 >> 1)
-      i3 |= (i2 >> 1)
     }
     [i0, i1, i2]
   end
 
+  def initstate
+    [INITPAT, 0, 0]
+  end
+
   def match(str, ambig=0)
-    s = state(nil,str)
+    s = state(initstate,str)
     s[ambig] & acceptpat != 0
   end
 end

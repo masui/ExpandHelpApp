@@ -56,9 +56,11 @@ class Generator
     @asearch = Asearch.new(pat)
     scanner = Scanner.new(@s.join('|'))
 
+    # HelpDataで指定した状態遷移機械全体を生成
     (startnode, endnode) = regexp(scanner,true) # top level
     listed = {}
     #
+    # 状態遷移機械からDepth-Firstで文字列を生成する
     # n個のノードを経由して生成される状態の集合をlists[n]に入れる
     #
     lists = []
@@ -66,14 +68,17 @@ class Generator
     # 初期状態
     #
     list = []
-    list[0] = GenNode.new(startnode.id, @asearch.state)
+    list[0] = GenNode.new(startnode.id, @asearch.initstate)
     lists[0] = list
     #
     (0..1000).each { |length|
-      break if app && app.inputPending
+      if app && app.inputPending then
+ puts "inputPending calc start"
+        break
+      end
       list = lists[length]
       newlist = []
-# puts "#{length} - #{list.length}"
+      # puts "#{length} - #{list.length}"
       list.each { |entry|
         srcnode = Node.node(entry.id)
         if list.length * srcnode.trans.length < 10000 then
@@ -82,11 +87,12 @@ class Generator
             srcnode.pars.each { |i|
               ss[i-1] = ss[i-1].to_s + trans.arg
             }
-            newstate = @asearch.state(entry.state, trans.str) # 新しいマッチング状態を計算してノードに保存する!
+            newstate = @asearch.state(entry.state, trans.str) # 新しいマッチング状態を計算してノードに保存
             s = entry.s + trans.str
             acceptno = trans.dest.accept
             if acceptno then
               if !listed[s] then
+                listed[s] = true
                 if (newstate[ambig] & @asearch.acceptpat) != 0 then # マッチ
                   if ss.length > 0 then
                     patstr = "(.*)\t" * (ss.length-1) + "(.*)"
@@ -96,7 +102,6 @@ class Generator
                   res << [s, eval('%('+@commands[acceptno]+')')]
                 end
               end
-              listed[s] = true
             end
             newlist << GenNode.new(trans.dest.id, newstate, s, ss, acceptno)
           }
@@ -106,7 +111,7 @@ class Generator
       lists << newlist
       break if res.length > 100
     }
-    app.inputPending = false if app
+#    app.inputPending = false if app
     res
   end
 

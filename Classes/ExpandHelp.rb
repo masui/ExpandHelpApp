@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+#
 # ExpandHelp.rb
 # ExpandHelpApp
 #
@@ -183,7 +184,7 @@ class ExpandHelp
     @thread = Thread.new do
       @generating = true
 #      while test_and_set(false) do
-if false then
+if false then # HelpDataのエントリひとつごとに候補を表示する場合
       while @inputPending do
         @inputPending = false
         @list = []
@@ -227,8 +228,10 @@ if false then
         }
       end
 else
+puts "inputPending = #{@inputPending}"
       while @inputPending do
         @inputPending = false
+puts "inputPending begin display -> inputPending = false"
         @generator = Generator.new
         @helpdata.helpdata.each { |data|
           #     if !data[2] || data[2] =~ @input.stringValue.to_s then 
@@ -238,6 +241,7 @@ else
         }
         #   @list = @generator.generate(@input.stringValue) # textfieldの場合
         @list = @generator.generate(" "+@input.string+" ", 0, self) # textiewの場合
+puts "generate end inputpending=#{@inputPending}"
         @table.reloadData
         @tableShouldBeShown = true
 
@@ -312,6 +316,7 @@ end
   def textDidChange(notification)
     @tableShouldBeShown = false
 
+puts "textDidChange = set inputPending true"
     @inputPending = true
 
     hideTableView

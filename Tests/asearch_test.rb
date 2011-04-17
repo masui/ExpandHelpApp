@@ -13,7 +13,7 @@ class AsearchTest < Test::Unit::TestCase
 
   def test_init
     a = Asearch.new('abc')
-    state = a.state
+    state = a.initstate
     assert state[0] != 0
     assert state[1] == 0
     assert state[2] == 0
@@ -35,7 +35,7 @@ class AsearchTest < Test::Unit::TestCase
     # "abcde"にマッチするかテスト
     #
     a = Asearch.new('abcde')
-    initstate = a.state
+    initstate = a.initstate
     laststate = a.state(initstate,'abcde')
     assert (laststate[0] & a.acceptpat) != 0
     laststate = a.state(initstate,'abcdf')   # 1文字置換
@@ -71,21 +71,21 @@ class AsearchTest < Test::Unit::TestCase
     # ワイルドカード
     #
     a = Asearch.new(' abc def')
-    initstate = a.state
+    initstate = a.initstate
     laststate = a.state(initstate,'abcdef')
     assert (laststate[0] & a.acceptpat) != 0
-    initstate = a.state
+    initstate = a.initstate
     laststate = a.state(initstate,'abcXXXXdef')
     assert (laststate[0] & a.acceptpat) != 0
-    initstate = a.state
+    initstate = a.initstate
     laststate = a.state(initstate,'abcXXXXYYY')
     assert (laststate[0] & a.acceptpat) == 0
-    initstate = a.state
+    initstate = a.initstate
     laststate = a.state(initstate,'abcXXXXde')
     assert (laststate[0] & a.acceptpat) == 0
     assert (laststate[1] & a.acceptpat) != 0
     assert (laststate[2] & a.acceptpat) != 0
-    initstate = a.state
+    initstate = a.initstate
     laststate = a.state(initstate,'ZZZZZabcdef')
     assert (laststate[0] & a.acceptpat) != 0
 
@@ -93,7 +93,7 @@ class AsearchTest < Test::Unit::TestCase
     # 漢字
     #
     a = Asearch.new('漢字文字列')
-    initstate = a.state
+    initstate = a.initstate
     laststate = a.state(initstate,'漢字文字列')
     assert (laststate[0] & a.acceptpat) != 0
     laststate = a.state(initstate,'漢字文字')

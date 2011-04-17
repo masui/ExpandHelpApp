@@ -73,7 +73,6 @@ class Generator
     #
     (0..1000).each { |length|
       if app && app.inputPending then
- puts "inputPending calc start"
         break
       end
       list = lists[length]
@@ -111,7 +110,6 @@ class Generator
       lists << newlist
       break if res.length > 100
     }
-#    app.inputPending = false if app
     res
   end
 

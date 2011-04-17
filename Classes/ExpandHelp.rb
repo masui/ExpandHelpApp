@@ -192,7 +192,6 @@ if false then # HelpDataのエントリひとつごとに候補を表示する�
         @helpdata.helpdata.each { |data|
           #     if !data[2] || data[2] =~ @input.stringValue.to_s then 
           if !data[2] || data[2] =~ @input.string then 
-#puts data[0]
             @generator = Generator.new
             @generator.add data[0], data[1]
             newlist = @generator.generate(" " + @input.string + " ", 0, self) # textiewの場合
@@ -228,10 +227,8 @@ if false then # HelpDataのエントリひとつごとに候補を表示する�
         }
       end
 else
-puts "inputPending = #{@inputPending}"
       while @inputPending do
         @inputPending = false
-puts "inputPending begin display -> inputPending = false"
         @generator = Generator.new
         @helpdata.helpdata.each { |data|
           #     if !data[2] || data[2] =~ @input.stringValue.to_s then 
@@ -241,7 +238,6 @@ puts "inputPending begin display -> inputPending = false"
         }
         #   @list = @generator.generate(@input.stringValue) # textfieldの場合
         @list = @generator.generate(" "+@input.string+" ", 0, self) # textiewの場合
-puts "generate end inputpending=#{@inputPending}"
         @table.reloadData
         @tableShouldBeShown = true
 
@@ -316,7 +312,6 @@ end
   def textDidChange(notification)
     @tableShouldBeShown = false
 
-puts "textDidChange = set inputPending true"
     @inputPending = true
 
     hideTableView

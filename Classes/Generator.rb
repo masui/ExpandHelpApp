@@ -49,8 +49,8 @@ class Generator
   #
   # ルールを解析して状態遷移機械を作成し、patにマッチするもののリストを返す
   #
-  def generate(pat, ambig=0, app = nil)
-    res = []
+  def generate(pat, app = nil)
+    res = [[],[],[]]
     patterns = pat.split.map { |p| p.downcase }
 
     @asearch = Asearch.new(pat)
@@ -66,7 +66,7 @@ class Generator
     # 生成しながらマッチングも計算する
     #
     lists = []
-    listed = {}
+    listed = [{},{},{}]
     #
     # 初期状態
     #
@@ -96,19 +96,23 @@ class Generator
             # マッチしてたら出力リストに加える
             #
             if acceptno then
-              if !listed[s] then
-                if (newstate[ambig] & @asearch.acceptpat) != 0 then # マッチ
-                  listed[s] = true
-                  sslen = ss.length
-                  if sslen > 0 then
-                    # patstr = "(.*)\t" * (sslen-1) + "(.*)"
-                    patstr = (["(.*)"] * sslen).join("\t")
-                    /#{patstr}/ =~ ss.join("\t")
+              maxambig = 2
+              (0..maxambig).each { |ambig|
+                if !listed[ambig][s] then
+                  if (newstate[ambig] & @asearch.acceptpat) != 0 then # マッチ
+                    maxambig = ambig if ambig < maxambig # 曖昧度0でマッチがみつかれば曖昧度1の検索はもう不要
+                    listed[ambig][s] = true
+                    sslen = ss.length
+                    if sslen > 0 then
+                      # patstr = "(.*)\t" * (sslen-1) + "(.*)"
+                      patstr = (["(.*)"] * sslen).join("\t")
+                      /#{patstr}/ =~ ss.join("\t")
+                    end
+                    # 'set date #{$2}' のような記述の$変数にsubstringの値を代入
+                    res[ambig] << [s, eval('%('+@commands[acceptno]+')')]
                   end
-                  # 'set date #{$2}' のような記述の$変数にsubstringの値を代入
-                  res << [s, eval('%('+@commands[acceptno]+')')]
                 end
-              end
+              }
             end
           }
         end
@@ -117,7 +121,7 @@ class Generator
       lists << newlist
       break if res.length > 100
     }
-    res
+    [res[0], res[1], res[2]]
   end
 
   #

@@ -193,7 +193,8 @@ class ExpandHelp
           end
         }
         #   @list = @generator.generate(@input.stringValue) # textfieldの場合
-        @list = @generator.generate(" "+@input.string+" ", 0, self) # textiewの場合
+        l = @generator.generate(" "+@input.string+" ", self) # textiewの場合
+        @list = (l[0].length > 0 ? l[0] : l[1].length > 0 ? l[1] : l[2])
         @table.reloadData
         @tableShouldBeShown = true
 

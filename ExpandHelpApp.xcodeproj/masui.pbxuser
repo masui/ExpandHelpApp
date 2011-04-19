@@ -66,10 +66,12 @@
 					PBXFileDataSource_Warnings_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 324528871;
-			PBXWorkspaceStateSaveDate = 324528871;
+			PBXPerProjectTemplateStateSaveDate = 324889809;
+			PBXWorkspaceStateSaveDate = 324889809;
 		};
 		perUserProjectItems = {
+			CE23E5F3135D6CD5008E6D51 /* PBXTextBookmark */ = CE23E5F3135D6CD5008E6D51 /* PBXTextBookmark */;
+			CE2429C1135C35FC00B84E9F = CE2429C1135C35FC00B84E9F /* PBXTextBookmark */;
 			CE6B619313289E0B003195FB = CE6B619313289E0B003195FB /* PBXTextBookmark */;
 			CE6B619413289E0B003195FB = CE6B619413289E0B003195FB /* PBXTextBookmark */;
 			CE6B619513289E0B003195FB = CE6B619513289E0B003195FB /* PBXTextBookmark */;
@@ -86,7 +88,6 @@
 			CEBC53C61327D37900984CBB = CEBC53C61327D37900984CBB /* PBXBookmark */;
 			CEBC53C71327D37900984CBB = CEBC53C71327D37900984CBB /* PBXBookmark */;
 			CEBC53C81327D37900984CBB = CEBC53C81327D37900984CBB /* PBXTextBookmark */;
-			CEFF467D135750BF00CDD639 = CEFF467D135750BF00CDD639 /* PBXTextBookmark */;
 		};
 		sourceControlManager = CE8B3DEE1318FD54001FF15A /* Source Control */;
 		userBuildSettings = {
@@ -118,6 +119,26 @@
 		executables = (
 			CE8B3DD01318FD41001FF15A /* ExpandHelpApp */,
 		);
+	};
+	CE23E5F3135D6CD5008E6D51 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = CE9DC0BB1321D39500F96ADC /* StatusView.rb */;
+		name = "StatusView.rb: 9";
+		rLen = 0;
+		rLoc = 204;
+		rType = 0;
+		vrLen = 542;
+		vrLoc = 0;
+	};
+	CE2429C1135C35FC00B84E9F /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = CE9DC0BB1321D39500F96ADC /* StatusView.rb */;
+		name = "StatusView.rb: 9";
+		rLen = 0;
+		rLoc = 204;
+		rType = 0;
+		vrLen = 615;
+		vrLoc = 0;
 	};
 	CE6B619313289E0B003195FB /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
@@ -314,7 +335,7 @@
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {734, 433}}";
 			sepNavSelRange = "{204, 0}";
-			sepNavVisRange = "{0, 566}";
+			sepNavVisRange = "{0, 542}";
 		};
 	};
 	CE9DC0F6132231C000F96ADC /* mountains.png */ = {
@@ -364,16 +385,6 @@
 		rLoc = 522;
 		rType = 0;
 		vrLen = 606;
-		vrLoc = 0;
-	};
-	CEFF467D135750BF00CDD639 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = CE9DC0BB1321D39500F96ADC /* StatusView.rb */;
-		name = "StatusView.rb: 8";
-		rLen = 6;
-		rLoc = 177;
-		rType = 0;
-		vrLen = 641;
 		vrLoc = 0;
 	};
 }

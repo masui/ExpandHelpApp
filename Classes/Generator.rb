@@ -119,7 +119,7 @@ class Generator
       }
       break if newlist.length == 0
       lists << newlist
-      break if res.length > 100
+      break if res[0].length > 100
     }
     [res[0], res[1], res[2]]
   end

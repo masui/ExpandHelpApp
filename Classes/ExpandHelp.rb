@@ -94,12 +94,12 @@ class ExpandHelp
                                      defer:false)
 #    @querywindow.makeKeyWindow
     @querywindow.contentView.addSubview(@queryview)
-    @querywindow.setBackgroundColor(NSColor.clearColor)
+#    @querywindow.setBackgroundColor(NSColor.clearColor)
     @querywindow.setMovableByWindowBackground(false)
     @querywindow.setExcludedFromWindowsMenu(true)
     @querywindow.setAlphaValue(1.0)
     @querywindow.setOpaque(false)
-    @querywindow.setHasShadow(true)
+    @querywindow.setHasShadow(false)
     @querywindow.useOptimizedDrawing(true)
     y = statusViewPosy - @querywindow.frame.size.height
     x = statusViewPosx
@@ -166,7 +166,7 @@ class ExpandHelp
 
   def chdir(dir)
     @helpdata.chdir(dir)
-    @cwd.setStringValue(dir)
+#    @cwd.setStringValue(dir)############
   end
 
   def test_and_set(val)
@@ -278,7 +278,7 @@ class ExpandHelp
   def showQueryView
     @querywindow.contentView.addSubview(@queryview)
     @querywindow.setHasShadow(true)
-    @querywindow.orderFrontRegardless
+#    @querywindow.orderFrontRegardless
   end
 
   def hideQueryView
@@ -290,7 +290,7 @@ class ExpandHelp
     if @tableShouldBeShown then
       @tablewindow.contentView.addSubview(@tableview)
       @tablewindow.setHasShadow(true)
-#      @tablewindow.orderFront(self)
+      @tablewindow.orderFront(self)
       @tablewindow.orderFrontRegardless
     end
   end

@@ -2,7 +2,7 @@
 # Generator.rb
 # ExpandHelpApp
 #
-# Created by Toshiyuki Masui on 11/02/26.
+# Created by Toshiyuki Masui on 2011/02/26.
 # Copyright 2011 Pitecan Systems. All rights reserved.
 
 #
@@ -50,7 +50,7 @@ class Generator
   # ルールを解析して状態遷移機械を作成し、patにマッチするもののリストを返す
   #
   def generate(pat, app = nil)
-    res = [[],[],[]]
+    res = [[],[],[]] # 曖昧度0,1,2のマッチ結果
     patterns = pat.split.map { |p| p.downcase }
 
     @asearch = Asearch.new(pat)
@@ -100,7 +100,7 @@ class Generator
               (0..maxambig).each { |ambig|
                 if !listed[ambig][s] then
                   if (newstate[ambig] & @asearch.acceptpat) != 0 then # マッチ
-                    maxambig = ambig if ambig < maxambig # 曖昧度0でマッチがみつかれば曖昧度1の検索はもう不要
+                    maxambig = ambig if ambig < maxambig # 曖昧度0でマッチすれば曖昧度1の検索は不要
                     listed[ambig][s] = true
                     sslen = ss.length
                     if sslen > 0 then

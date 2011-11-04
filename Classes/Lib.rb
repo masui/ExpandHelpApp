@@ -35,12 +35,25 @@ end
 def ps
   pslines = `ps -eaf`.split(/[\r\n]/)
   pslines.shift
-  pslines.collect { |line|
+  s = pslines.collect { |line|
     line.sub!(/^\s+/,'')
     elements = line.split(/ +/)
     pid = elements[1].to_i
     pname = elements[7].to_s
     pname.sub!(/^.*\//,'')
+    pname = 'mmm' if pname == ''
     "#{pname}\t#{pid}"
-  }.join('|')
+  }[0..30].join('|')
+  File.open("/tmp/loglog","w"){ |f|
+    f.puts s
+  }
+  s
 end
+
+def setdate(h,m1,m2)
+  t = Time.now
+  s = sprintf("%02d%02d%02d%d%d",t.month,t.day,h.to_i,m1.to_i,m2.to_i)
+  system "/Users/masui/bin/date #{s}"
+  ''
+end
+

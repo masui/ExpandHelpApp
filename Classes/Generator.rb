@@ -46,6 +46,11 @@ class Generator
     @commands << command
   end
 
+  def delete
+    @s.pop
+    @commands.pop
+  end
+
   #
   # ルールを解析して状態遷移機械を作成し、patにマッチするもののリストを返す
   #

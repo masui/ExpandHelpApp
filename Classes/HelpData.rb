@@ -11,6 +11,7 @@ class HelpData
   def initialize
     @helpdata =
       [
+#       ['aaaaa','# bbbbb'],
        ['(#{weather})の天気を調べる',
         '`open http://tenki.jp/forecast/point-#{$1}.html`'],
        ['(#{restaurant})のレストランを調べる',
@@ -36,7 +37,7 @@ class HelpData
        ['ファイルを((きっちり(きっちり)?)?)消す',
         '# delete file #{$1}'],
        ['(今の|現在)(時間|時刻)は(#{date})です',
-        'Time.new'],
+        'Time.now.to_s'],
        ['(1|2|3|4|5|6|7|8|9)MBより大きなファイルを(消す|削除する)',
         '# delete files bigger than #{$1}MB',
         /[0-9]/],
@@ -53,7 +54,7 @@ class HelpData
        ['(走って|動いて)いる(プロセス|アプリケーション|プログラム)をリストする',
         '`ps -eaf`'],
        ['現在のディレクトリのファイルをリストする',
-        '`ls -l`'],
+        '`terminal "ls -l"`'],
        ['(#{ls})というファイルを見る',
         'show "#{$1}"'],
        ['tmpディレクトリに移動する',
@@ -82,6 +83,15 @@ class HelpData
        # abc.htmlというファイルをfirefoxで開く
        ['(#{ls})というファイルをFirefox(ブラウザ)で開く',
         '`open "#{$1}" -a firefox`'],
+
+       # mdfind系を追加 2011/11 'terminal'コマンドでTerminal.appに出力する
+       ['大きな(#{apps})ファイルをリストする',
+        '`terminal "mdfind2 -c #{HelpData.ctype($1)} -b 10 | head -10"`'], # Generator.rbでevalされるため
+       ['(1|2|3|4|5|6|7|8|9|10|11)ヶ月以内に(Yahoo|fc2)からダウンロードしたファイルをリストする',
+        '`mdfind2 -f #{HelpData.past($1.to_i*31)} -d "*#{$2}*"`'],
+#        '`mdfind2 -f 2011 -d "*#{$2}*"`'],
+#        '`mdfind2 -d "*fc2*"`'],
+#        '`mdfind2 -d "*#{$2}*"`'],
       ]
     @cwd = ENV['HOME']
   end
@@ -120,6 +130,25 @@ class HelpData
     @cwd = dir
     Dir.chdir(dir)
   end
+
+  def apps
+    'OmniGraffle|Word|Excel'
+  end
+  
+  def HelpData.ctype(s)
+    t = {}
+    t['OmniGraffle'] = 'com.omnigroup.omnigraffle.graffle'
+    t['Word'] = 'com.microsoft.word.doc'
+    t['Excel'] = 'com.microsoft.excel.xls'
+    # org.openxmlformats.wordprocessingml.document
+    t[s]
+  end
+
+  def HelpData.past(days)
+    t = Time.now - days * 24 * 60 * 60
+    "#{t.year}/#{t.month}/#{t.day}"
+  end
+
 
   def helpdata
     @helpdata.collect { |data|

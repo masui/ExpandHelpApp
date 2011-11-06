@@ -87,13 +87,10 @@ class HelpData
        # mdfind系を追加 2011/11 'terminal'コマンドでTerminal.appに出力する
        ['大きな(#{apps})ファイルをリストする',
         '`terminal "mdfind2 -c \\#{HelpData.ctype(\"#{$1}\")} -b 10 | head -10"`'], # Generator.rbでevalされるため
-#        '`terminal "mdfind2 -c #{HelpData.ctype($1)} -b 10 | head -10"`'], # Generator.rbでevalされるため
-#        '`mdfind2 -c #{HelpData.ctype($1)} -b 10 | head -10 `'], # 何故かうまくいかない
        ['(1|2|3|4|5|6|7|8|9|10|11)ヶ月以内に(Yahoo|fc2)からダウンロードしたファイルをリストする',
         '`mdfind2 -f \\#{HelpData.past(#{$1}*31)} -d "*#{$2}*"`'],
        ['(最新の|(最も|いちばん)新しい)(#{apps})ファイルを(開く|見る)',
-        'file=`mdfind2 -c com.omnigroup.omnigraffle.graffle -f 1970 | head -1`; `open \\#{file}`'],
-#        'file=`mdfind2 -c #{HelpData.ctype($3)} -f 1970 | head -1`; `open #{file}`'],
+        'file=`mdfind2 -c \\#{HelpData.ctype(\"#{$3}\")} -f 1970 | head -1`; `open \\#{file}`'],
        ]
     @cwd = ENV['HOME']
   end

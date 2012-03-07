@@ -113,6 +113,7 @@ class Generator
                       patstr = (["(.*)"] * sslen).join("\t")
                       /#{patstr}/ =~ ss.join("\t")
                     end
+##                    next if $1 == $2
                     # 'set date #{$2}' のような記述の$変数にsubstringの値を代入
                 File.open("/tmp/log","a"){ |f|
                   f.puts "#{s}-----" + eval('%('+@commands[acceptno]+')')

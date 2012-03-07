@@ -11,7 +11,6 @@ class HelpData
   def initialize
     @helpdata =
       [
-#       ['aaaaa','# bbbbb'],
        ['(#{weather})の天気を調べる',
         '`open http://tenki.jp/forecast/point-#{$1}.html`'],
        ['(#{restaurant})のレストランを調べる',
@@ -22,6 +21,15 @@ class HelpData
        ['(0|1|2|3|4|5|6|7|8|9|10|11|12)時に(時計|時間|時刻)を(セットする|設定する|あわせる)',
         '# date #{$1}:00',
         /[0-9]/],
+       ['(時計|時間|時刻)を(0|1|2|3|4|5|6|7|8|9|10|11|12):(0|1|2|3|4|5)(0|1|2|3|4|5|6|7|8|9)(AM|PM)に(セットする|設定する|あわせる)',
+        'setdate(#{$2},#{$3},#{$4})',
+        /[0-9]:[0-5][0-9]/],
+       ['(時計|時刻)を(0|1|2|3|4|5|6|7|8|9):45に(セットする|設定する|あわせる)',
+        'setdate(3,4,5)',
+        /[0-9]:[0-5][0-9]/],
+       ['(0|1|2|3|4|5|6|7|8|9):45にアラームを鳴らす',
+        'setdate(3,4,5)',
+        /[0-9]:[0-5][0-9]/],
        ['(1|2|3|4|5|6|7|8|9)時間ごとにプログラムを(起動する|動かす)',
         '# cron repeat #{$1}',
         /[0-9]/],
@@ -60,8 +68,9 @@ class HelpData
        ['tmpディレクトリに移動する',
         'chdir("/tmp"); `ls -l`'],
        ['(#{station})駅から(#{station})駅までの電車(の(時刻|時間))を調べる',
-        '`open "http://www.jorudan.co.jp/norikae/cgi/nori.cgi?rf=top&eok1=&eok2=&pg=0&eki1=#{$1}&eki2=#{$2}&Cway=0&S=検索&Csg=1"`',
-        /電車|駅|時刻|時間/],
+        '`open "http://www.jorudan.co.jp/norikae/cgi/nori.cgi?rf=top&eok1=&eok2=&pg=0&eki1=#{$1}&eki2=#{$2}&Cway=0&S=検索&Csg=1"`'],
+#        '`open "http://www.jorudan.co.jp/norikae/cgi/nori.cgi?rf=top&eok1=&eok2=&pg=0&eki1=#{$1}&eki2=#{$2}&Cway=0&S=検索&Csg=1"`',
+#        /電車|駅|時刻|時間/],
        ['(#{twitteraccount})のtwitterを読む',
         '`open http://twitter.com/#{$1}`'],
        ['twitterを読む',
@@ -85,12 +94,17 @@ class HelpData
         '`open "#{$1}" -a firefox`'],
 
        # mdfind系を追加 2011/11 'terminal'コマンドでTerminal.appに出力する
-       ['大きな(#{apps})ファイルをリストする',
-        '`terminal "mdfind2 -c \\#{HelpData.ctype(\"#{$1}\")} -b 10 | head -10"`'], # Generator.rbでevalされるため
-       ['(1|2|3|4|5|6|7|8|9|10|11)ヶ月以内に(Yahoo|fc2)からダウンロードしたファイルをリストする',
-        '`mdfind2 -f \\#{HelpData.past(#{$1}*31)} -d "*#{$2}*"`'],
        ['(最新の|(最も|いちばん)新しい)(#{apps})ファイルを(開く|見る)',
-        'file=`mdfind2 -c \\#{HelpData.ctype(\"#{$3}\")} -f 1970 | head -1`; `open \\#{file}`'],
+        'file=`mdfind2 -c #{$3} -f 1970 | head -1`; `open \\#{file}`'],
+       ['大きな(#{apps})ファイルをリストする',
+        '`terminal "mdfind2 -c #{$1} -b 10 | head -10"`'],
+#       ['大きな(#{apps})ファイルをリストする',
+#        '`terminal "mdfind2 -c \\#{HelpData.ctype(\"#{$1}\")} -b 10 | head -10"`'], # Generator.rbでevalされるため
+       ['(1|2|3|4|5|6|7|8|9|10|11)ヶ月以内に(Yahoo|YouTube)からダウンロードしたファイルをリストする',
+        '`mdfind2 -f 2011 -d "*#{$2}*"`'],
+#        '`mdfind2 -f 201110 -d "*#{$2}*"`'],
+#       '`mdfind2 -f \\#{HelpData.past(#{$1}*31)} -d "*#{$2}*"`'],
+#        '`mdfind2 -f #{HelpData.past($1.to_i*31)} -d "*#{$2}*"`'],
        ]
     @cwd = ENV['HOME']
   end
@@ -130,8 +144,12 @@ class HelpData
     Dir.chdir(dir)
   end
 
-  def apps
+  def apps_xxx
     'OmniGraffle|Word|Excel'
+  end
+
+  def apps
+    "OmniGraffle\tcom.omnigroup.omnigraffle.graffle|Word\tcom.microsoft.word.doc|Excel\tcom.microsoft.excel.xls"
   end
   
   def HelpData.ctype(s)
